@@ -1,0 +1,2026 @@
+<title>四領の書</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@600;700&family=Noto+Serif+JP:wght@400;600&display=swap">
+<style>
+:root{
+  --ground:#12100c;
+  --panel:#1a1611;
+  --deep:#221c15;
+  --rule:#4a3e2e;
+  --line:#e9e0cd;
+  --dim:#8d8270;
+  --gold:#c9a227;
+  --flame:#c0392b;
+  --moss:#7d9a5c;
+  --jp:"Noto Serif JP","Hiragino Mincho ProN","Yu Mincho",serif;
+  --disp:"Shippori Mincho B1","Hiragino Mincho ProN","Yu Mincho",serif;
+  --num:"Shippori Mincho B1","Noto Serif JP",serif;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;background:var(--ground);color:var(--line);
+  font-family:var(--jp);font-size:16px;line-height:1.85;
+}
+.wrap{max-width:940px;margin:0 auto;padding-inline:16px;padding-block:30px 72px;display:flex;flex-direction:column;gap:20px}
+
+/* ── 木簡の面 ── */
+.win{
+  --frame:var(--rule);
+  position:relative;background:var(--panel);
+  border:1px solid var(--frame);border-radius:2px;padding:16px 18px;
+}
+.win::before{content:"";position:absolute;inset:3px;border:1px solid rgba(201,162,39,.16);pointer-events:none;border-radius:1px}
+.win.warn{--frame:var(--gold)}
+.win.danger{--frame:var(--flame)}
+
+h1,h2,h3{margin:0;font-family:var(--disp);font-weight:600;text-wrap:balance;letter-spacing:.06em}
+.px{font-family:var(--num);font-variant-numeric:tabular-nums}
+
+/* ── 主の位 ── */
+.status{display:flex;flex-wrap:wrap;gap:6px 30px;align-items:baseline}
+.status .name{font-family:var(--disp);font-size:22px;letter-spacing:.12em;flex:1 1 220px}
+.status .sub{font-size:14px;color:var(--dim)}
+.status .sub b{font-family:var(--num);font-size:14px;color:var(--line);font-weight:400;font-variant-numeric:tabular-nums}
+.status .sub .act{margin-left:10px;font-size:12px}
+.goldform{flex:1 1 100%;display:flex;gap:12px;align-items:flex-end;flex-wrap:wrap;margin-top:8px;border-top:1px solid var(--deep);padding-top:10px}
+
+/* ── 注進 ── */
+.otsuge{display:flex;flex-direction:column;gap:5px;font-size:15px}
+.otsuge .row{display:flex;gap:10px;align-items:baseline}
+.otsuge .mark{flex:0 0 auto}
+.otsuge .od{color:var(--flame)}
+.otsuge .soon{color:var(--gold)}
+.otsuge .calm{color:var(--dim)}
+.otsuge .when{font-family:var(--num);font-size:13px;flex:0 0 auto;font-variant-numeric:tabular-nums}
+
+/* ── 段の見出し ── */
+.grouplabel{font-family:var(--disp);font-size:14px;color:var(--line);letter-spacing:.45em;
+  border-left:3px solid var(--flame);padding-left:11px;margin-bottom:-10px}
+
+/* ── 領地 ── */
+.realms{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(196px,1fr))}
+.card{text-align:left;font:inherit;color:inherit;cursor:pointer;display:flex;flex-direction:column;gap:8px;min-height:154px}
+.card:hover,.card:focus-visible{--frame:var(--gold);outline:none}
+.card .cname{font-family:var(--disp);font-size:20px;letter-spacing:.1em;display:flex;align-items:baseline;gap:8px}
+.card .role{font-size:12px;color:var(--dim);margin-top:-6px;line-height:1.6}
+.card dl{margin:0;display:grid;grid-template-columns:1fr auto;gap:2px 10px;font-size:14px}
+.card dt{color:var(--dim)}
+.card dd{margin:0;font-family:var(--num);font-size:14px;text-align:right;font-variant-numeric:tabular-nums}
+.card .next{margin-top:auto;padding-top:8px;border-top:1px solid var(--deep);font-size:13px;color:var(--dim);display:flex;justify-content:space-between;gap:8px;align-items:baseline}
+.card .next b{font-family:var(--num);font-size:13px;font-weight:400;color:var(--line);font-variant-numeric:tabular-nums}
+.card.warn .next b{color:var(--gold)}
+.card.danger .next b{color:var(--flame)}
+
+/* ── 帯（工房・糧道・配下） ── */
+.forge{display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap;text-align:left;font:inherit;color:inherit;cursor:pointer;width:100%}
+.forge:hover,.forge:focus-visible{--frame:var(--gold);outline:none}
+.forge .ttl{font-family:var(--disp);font-size:18px;letter-spacing:.08em}
+.forge .note{font-size:13px;color:var(--dim)}
+.forge .cnt{font-family:var(--num);font-size:14px;color:var(--gold);font-variant-numeric:tabular-nums}
+
+/* ── 領地の内 ── */
+.rhead{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap}
+.rhead h2{font-size:24px}
+.rhead .role{font-size:13px;color:var(--dim)}
+.tabs{display:flex;flex-wrap:wrap;gap:2px 22px;font-size:15px;margin-top:12px;border-top:1px solid var(--rule);padding-top:12px}
+.tab{background:none;border:none;font:inherit;font-family:var(--disp);color:var(--dim);cursor:pointer;padding:2px 0;letter-spacing:.1em}
+.tab[aria-selected="true"]{color:var(--gold)}
+.tab[aria-selected="true"]::before{content:"▶ "}
+.tab:focus-visible{outline:1px solid var(--gold);outline-offset:2px}
+
+.qlist{list-style:none;margin:12px 0 0;padding:0;display:flex;flex-direction:column}
+.qrow{display:grid;grid-template-columns:1.4em 1fr auto;gap:4px 10px;align-items:baseline;padding:10px 0;border-top:1px solid var(--deep)}
+.qrow:first-child{border-top:none}
+.qrow .mk{color:var(--dim)}
+.qrow.doing .mk{color:var(--gold)}
+.qrow.done .mk{color:var(--moss)}
+.qrow.over .mk{color:var(--flame)}
+.qrow .ttl{font-size:16px;overflow-wrap:anywhere}
+.qrow.done .ttl{color:var(--dim);text-decoration:line-through}
+.qrow .meta{font-family:var(--num);font-size:13px;color:var(--dim);text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums}
+.qrow.over .meta{color:var(--flame)}
+.qrow.soon .meta{color:var(--gold)}
+.qrow .acts{grid-column:2/-1;display:flex;flex-wrap:wrap;gap:4px 18px;font-size:13px}
+.badge{font-size:12px;color:var(--gold);margin-left:10px;white-space:nowrap}
+.badge.rep{color:var(--moss)}
+.act{background:none;border:none;font:inherit;color:var(--dim);cursor:pointer;padding:0}
+.act:hover,.act:focus-visible{color:var(--gold);outline:none}
+.act:hover::before,.act:focus-visible::before{content:"▶"}
+.act.del:hover,.act.del:focus-visible{color:var(--flame)}
+.empty{color:var(--dim);font-size:15px;padding:14px 0}
+
+/* ── 巡察 ── */
+.patrol{margin-top:12px;padding:10px 13px;background:var(--deep);border-left:2px solid var(--gold);display:flex;flex-wrap:wrap;gap:4px 16px;align-items:baseline}
+.patrol .pd{font-family:var(--num);font-size:14px;color:var(--gold);font-variant-numeric:tabular-nums}
+.patrol .pn{font-size:15px;flex:1 1 auto}
+.patrol .pc{font-size:13px;color:var(--dim)}
+
+/* ── 入力 ── */
+form.add{margin-top:16px;border-top:1px solid var(--rule);padding-top:14px;display:grid;gap:10px}
+form.add .line{display:flex;flex-wrap:wrap;gap:10px}
+label{font-size:13px;color:var(--dim);display:flex;flex-direction:column;gap:4px}
+input,select,textarea{
+  font:inherit;font-size:15px;font-family:var(--jp);background:var(--ground);color:var(--line);
+  border:1px solid var(--rule);border-radius:2px;padding:7px 9px;
+}
+input[type="text"],input[type="url"]{width:100%}
+textarea{width:100%;resize:vertical;line-height:1.8}
+input:focus,select:focus,textarea:focus{outline:2px solid var(--gold);outline-offset:1px;border-color:var(--gold)}
+.tline{flex:1 1 260px}
+button.go{
+  font:inherit;font-family:var(--disp);font-size:15px;letter-spacing:.1em;
+  background:var(--deep);color:var(--line);
+  border:1px solid var(--gold);border-radius:2px;padding:8px 20px;cursor:pointer;align-self:start;
+}
+button.go:hover,button.go:focus-visible{color:var(--gold);background:var(--panel);outline:none}
+button.go:disabled{opacity:.5;cursor:default}
+
+.back{background:none;border:none;font:inherit;font-size:15px;color:var(--dim);cursor:pointer;padding:0;align-self:start}
+.back:hover,.back:focus-visible{color:var(--gold);outline:none}
+.back::before{content:"◀ "}
+
+/* ── 糧道図 ── */
+.rmhead{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap}
+.fsel{display:flex;gap:2px 20px;flex-wrap:wrap;font-size:15px}
+.gap{margin-top:14px;padding:11px 13px;background:var(--deep);border-left:3px solid var(--flame);font-size:14px}
+.gap b{color:var(--gold);font-weight:400}
+.stage{margin-top:16px}
+.stagename{font-family:var(--disp);font-size:13px;color:var(--dim);letter-spacing:.4em}
+.arrow{color:var(--rule);text-align:center;font-size:16px;line-height:1.1;margin:8px 0}
+.mlist{list-style:none;margin:6px 0 0;padding:0}
+.mrow{display:grid;grid-template-columns:1.4em 1fr auto;gap:3px 10px;align-items:baseline;padding:8px 0;border-top:1px solid var(--deep)}
+.mrow:first-child{border-top:none}
+.mrow .mk{color:var(--dim)}
+.mrow.wip .mk{color:var(--gold)}
+.mrow.live .mk{color:var(--moss)}
+.mrow .ttl{font-size:16px;overflow-wrap:anywhere}
+.mrow .own{font-size:12px;color:var(--dim);margin-left:8px}
+.mrow .num{font-family:var(--num);font-size:13px;text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums;color:var(--dim)}
+.mrow.live .num{color:var(--line)}
+.mrow .tools{grid-column:2/-1;display:flex;flex-wrap:wrap;gap:4px 18px;font-size:13px}
+.mrow a{color:var(--dim);text-decoration:none}
+.mrow a:hover,.mrow a:focus-visible{color:var(--gold);outline:none}
+.mrow a::before{content:"⇱ "}
+.entries{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(236px,1fr));margin-top:10px}
+.entry{display:flex;flex-direction:column;gap:6px}
+.entry.wip{--frame:var(--gold)}
+.entry.live{--frame:var(--moss)}
+.ehead{display:flex;gap:8px;align-items:baseline}
+.ehead .ename{font-family:var(--disp);font-size:18px;letter-spacing:.06em}
+.emeta{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;font-size:12px;color:var(--dim)}
+.emeta .enum{font-family:var(--num);font-size:13px;font-variant-numeric:tabular-nums}
+.entry .mrow{padding:5px 0;font-size:14px}
+.entry .mrow .ttl{font-size:14px}
+.entry .tools{display:flex;flex-wrap:wrap;gap:4px 14px;font-size:12px;margin-top:auto;padding-top:6px}
+.merge{margin:16px 0;padding:11px 13px;border-top:1px solid var(--gold);border-bottom:1px solid var(--gold);display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:baseline}
+.merge .mlabel{font-family:var(--disp);font-size:13px;color:var(--dim);letter-spacing:.4em}
+.merge .mval{font-family:var(--num);font-size:15px;color:var(--gold);font-variant-numeric:tabular-nums}
+.medit{grid-column:1/-1;margin-top:10px;padding:12px 13px;background:var(--deep);display:grid;gap:10px}
+.medit .line{display:flex;flex-wrap:wrap;gap:10px}
+
+/* ── 軍師 ── */
+.advisor{display:flex;flex-direction:column;gap:12px}
+.adhead{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap}
+.adtitle h3{font-size:19px}
+.adwho{font-size:13px;color:var(--gold);letter-spacing:.06em}
+.adtools{display:flex;gap:4px 18px;flex-wrap:wrap;font-size:13px}
+.adnote{font-size:13px;color:var(--gold);min-height:1.2em}
+.aiout{margin:0;font-family:var(--jp);font-size:15px;line-height:1.9;white-space:pre-wrap;overflow-wrap:anywhere;
+  border-left:2px solid var(--rule);padding-left:13px}
+.aiout:empty{display:none}
+.adform{display:flex;flex-direction:column;gap:9px}
+.adrow{display:flex;gap:18px;align-items:center;flex-wrap:wrap}
+
+/* ── 書庫 ── */
+.shelf{border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);padding:12px 0;display:flex;flex-direction:column;gap:9px}
+.shead{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:baseline}
+.slabel{font-family:var(--disp);font-size:13px;color:var(--dim);letter-spacing:.4em}
+.scount{font-family:var(--num);font-size:13px;color:var(--dim);font-variant-numeric:tabular-nums}
+.dlist{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:5px}
+.drow{display:flex;gap:10px;align-items:baseline;flex-wrap:wrap;font-size:14px}
+.dcheck{flex:1 1 180px;flex-direction:row;align-items:baseline;gap:9px;font-size:14px;color:var(--line);cursor:pointer;overflow-wrap:anywhere}
+.dcheck input{width:14px;height:14px;accent-color:var(--gold);padding:0;flex:0 0 auto}
+.dsize{font-family:var(--num);font-size:12px;color:var(--dim);white-space:nowrap;font-variant-numeric:tabular-nums}
+.dpath{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12px;color:var(--dim);overflow-wrap:anywhere}
+.imgs{display:flex;gap:6px 12px;flex-wrap:wrap;align-items:baseline}
+.chip{font-size:13px;color:var(--gold);display:inline-flex;gap:6px;align-items:baseline}
+.drop{display:flex;flex-direction:column;gap:3px;border:1px dashed var(--rule);border-radius:2px;
+  padding:11px 13px;cursor:pointer;font-size:14px;color:var(--line);text-align:center}
+.drop.over{border-color:var(--gold);color:var(--gold)}
+.drop:focus-within{outline:2px solid var(--gold);outline-offset:2px}
+.drop .dhint{font-size:11px;color:var(--dim)}
+.drop input[type="file"]{position:absolute;width:1px;height:1px;opacity:0;pointer-events:none}
+.pathform{display:flex;gap:8px;flex-wrap:wrap;align-items:flex-end}
+.pathform label{flex:1 1 200px}
+.pathform button.go{padding:7px 14px;font-size:14px}
+
+/* ── 配下 ── */
+.glist{list-style:none;margin:14px 0 0;padding:0;display:flex;flex-direction:column}
+.grow{padding:12px 0;border-top:1px solid var(--deep);display:flex;flex-direction:column;gap:6px}
+.grow:first-child{border-top:none}
+.ghead{display:flex;gap:12px;align-items:baseline;flex-wrap:wrap}
+.gkind{font-family:var(--num);font-size:12px;border:1px solid var(--rule);padding:1px 8px;color:var(--dim)}
+.gkind.ai{color:var(--gold);border-color:var(--gold)}
+.gkind.man{color:var(--moss);border-color:var(--moss)}
+.gname{font-family:var(--disp);font-size:18px;letter-spacing:.08em}
+.gskill{font-size:13px;color:var(--dim)}
+.grow .tools{display:flex;gap:4px 18px;flex-wrap:wrap;font-size:13px}
+.orderbox{grid-column:1/-1;margin-top:10px;padding:12px 13px;background:var(--deep);display:flex;flex-direction:column;gap:10px}
+.orderbox .line{display:flex;flex-wrap:wrap;gap:10px}
+.repbox{grid-column:1/-1;margin-top:8px;padding:11px 13px;background:var(--deep);display:flex;flex-direction:column;gap:8px}
+.rephead{display:flex;justify-content:space-between;gap:6px 14px;flex-wrap:wrap;font-size:13px;color:var(--dim)}
+.orderbox textarea[readonly]{font-size:13px;line-height:1.75;color:var(--dim)}
+.reptext{margin:0;font-family:var(--jp);font-size:14px;line-height:1.9;white-space:pre-wrap;overflow-wrap:anywhere;
+  max-height:340px;overflow-y:auto;border-left:2px solid var(--rule);padding-left:12px}
+
+.execbox{border-top:1px solid var(--rule);padding-top:13px;display:flex;flex-direction:column;gap:10px}
+.execbox .line{display:flex;flex-wrap:wrap;gap:10px;align-items:flex-end}
+.notice{font-size:14px;color:var(--gold)}
+.hidden{display:none!important}
+@media (prefers-reduced-motion:no-preference){
+  .blink{animation:bl 1.2s steps(2,start) infinite}
+  @keyframes bl{50%{opacity:.3}}
+}
+</style>
+
+<div class="wrap">
+
+  <!-- ステータス -->
+  <div class="win status" id="status"></div>
+
+  <!-- おつげ -->
+  <div class="win" id="otsugeWin">
+    <h2 style="font-size:15px;color:var(--dim);letter-spacing:.2em">注 進</h2>
+    <div class="otsuge" id="otsuge"></div>
+  </div>
+
+  <!-- フィールド -->
+  <div id="field">
+    <div style="display:flex;flex-direction:column;gap:18px">
+      <div class="grouplabel">統 治</div>
+      <div class="realms" id="exec"></div>
+      <div class="grouplabel">監 察</div>
+      <div class="realms" id="audit"></div>
+      <div id="forgeSlot"></div>
+      <div id="routeSlot"></div>
+      <div id="genSlot"></div>
+    </div>
+  </div>
+
+  <!-- 領地画面 -->
+  <div id="realmView" class="hidden"></div>
+
+  <!-- モジュール管理 -->
+  <div id="routeView" class="hidden"></div>
+
+  <!-- 配下名簿 -->
+  <div id="genView" class="hidden"></div>
+
+  <div class="notice hidden" id="dbNotice">※ 記録所に繋がっていません。この画面での変更は保存されません。</div>
+</div>
+
+<script>
+(function(){
+  "use strict";
+
+  var db=null, ready=false;
+  var state={realms:[],quests:[],patrols:[],funnels:[],entries:[],modules:[],managers:[],docs:[],generals:[],reports:[],hero:{gold:0}};
+  var view={mode:"field",realmId:null,tab:"main",funnelId:null,editModule:null,editEntry:null,editManager:null,editGeneral:null,orderQuest:null,openReports:null,cmdQuest:null,editGold:false};
+  var STAGES=["集客","教育","販売","継続"];
+  var MSTATUS={todo:["・","未着手"],wip:["▶","普請中"],live:["✓","稼働中"]};
+
+  /* ---------- 日付 ---------- */
+  function pad(n){return n<10?"0"+n:""+n;}
+  function todayStr(){var d=new Date();return d.getFullYear()+"-"+pad(d.getMonth()+1)+"-"+pad(d.getDate());}
+  var TODAY=todayStr();
+  var WD=["日","月","火","水","木","金","土"];
+  function fmt(iso){
+    if(!iso) return "";
+    var p=iso.split("-"); var d=new Date(+p[0],+p[1]-1,+p[2]);
+    return (+p[1])+"/"+(+p[2])+"("+WD[d.getDay()]+")";
+  }
+  function daysUntil(iso){
+    if(!iso) return null;
+    var p=iso.split("-"); var a=new Date(+p[0],+p[1]-1,+p[2]);
+    var n=new Date(); n=new Date(n.getFullYear(),n.getMonth(),n.getDate());
+    return Math.round((a-n)/86400000);
+  }
+  function longToday(){
+    var d=new Date();
+    return d.getFullYear()+"年"+(d.getMonth()+1)+"月"+d.getDate()+"日（"+WD[d.getDay()]+"）";
+  }
+
+  /* ---------- 集計 ---------- */
+  function questsOf(rid){return state.quests.filter(function(q){return q.realmId===rid;});}
+  function patrolsOf(rid){
+    return state.patrols.filter(function(p){return p.realmId===rid&&p.status!=="done";})
+      .sort(function(a,b){return (a.date||"9999").localeCompare(b.date||"9999");});
+  }
+  function isOverdue(q){return q.status!=="done"&&q.due&&q.due<TODAY;}
+  function nextDue(rid){
+    var ds=questsOf(rid).filter(function(q){return q.status!=="done"&&q.due;}).map(function(q){return q.due;});
+    patrolsOf(rid).forEach(function(p){if(p.date)ds.push(p.date);});
+    ds.sort();
+    return ds.length?ds[0]:null;
+  }
+  function realmTone(rid){
+    var qs=questsOf(rid);
+    if(qs.some(isOverdue)) return "danger";
+    var nd=nextDue(rid);
+    if(nd!==null){var d=daysUntil(nd); if(d!==null&&d<0)return "danger"; if(d!==null&&d<=3)return "warn";}
+    return "";
+  }
+
+  /* ---------- 描画 ---------- */
+  var $=function(id){return document.getElementById(id);};
+  function el(tag,cls,txt){var e=document.createElement(tag);if(cls)e.className=cls;if(txt!=null)e.textContent=txt;return e;}
+
+  function renderStatus(){
+    var box=$("status"); box.textContent="";
+    box.appendChild(el("div","name","芳川恒徳"));
+
+    var wins=state.quests.filter(function(q){return q.status==="done"&&q.kind==="sub";}).length;
+    var conq=state.quests.filter(function(q){return q.status==="done"&&q.kind==="main";}).length;
+
+    var w1=el("div","sub"); w1.appendChild(document.createTextNode("戦勝 "));
+    w1.appendChild(el("b",null,String(wins))); box.appendChild(w1);
+
+    var w2=el("div","sub"); w2.appendChild(document.createTextNode("制圧 "));
+    w2.appendChild(el("b",null,String(conq))); box.appendChild(w2);
+
+    var w3=el("div","sub"); w3.appendChild(document.createTextNode("金 "));
+    w3.appendChild(el("b",null,(state.hero.gold||0).toLocaleString("ja-JP")+" 円"));
+    w3.appendChild(actBtn(view.editGold?"閉じる":"改める",function(){
+      view.editGold=!view.editGold; render();
+    }));
+    box.appendChild(w3);
+
+    box.appendChild(el("div","sub",longToday()));
+
+    if(view.editGold){
+      var f=el("form","goldform");
+      var l=el("label",null,null); l.appendChild(document.createTextNode("協会の預金残高（円）"));
+      var i=document.createElement("input"); i.type="number"; i.id="gold-input";
+      i.value=(state.hero.gold||0); i.style.width="200px";
+      l.appendChild(i); f.appendChild(l);
+      var go=el("button","go","記す"); go.type="submit"; f.appendChild(go);
+      f.addEventListener("submit",function(e){
+        e.preventDefault();
+        var v=Number(i.value); if(isNaN(v))v=0;
+        state.hero={gold:v};
+        view.editGold=false; render();
+        if(db) db.doc("hero/status").set({gold:v,updatedAt:new Date().toISOString()}).catch(warn);
+      });
+      box.appendChild(f);
+    }
+  }
+
+  function renderOtsuge(){
+    var box=$("otsuge"); box.textContent="";
+    var win=$("otsugeWin"); win.classList.remove("warn","danger");
+    var over=state.quests.filter(isOverdue);
+    var rows=[];
+    if(over.length){
+      rows.push({cls:"od",mark:"☠",text:"期限切れ "+over.length+"件",when:""});
+    }
+    var up=[];
+    state.quests.forEach(function(q){
+      if(q.status==="done"||!q.due)return;
+      var d=daysUntil(q.due); if(d!==null&&d>=0&&d<=7)up.push({date:q.due,label:nameOf(q.realmId)+" "+q.title,d:d});
+    });
+    state.patrols.forEach(function(p){
+      if(p.status==="done"||!p.date)return;
+      var d=daysUntil(p.date); if(d!==null&&d>=0&&d<=30)up.push({date:p.date,label:nameOf(p.realmId)+" "+p.title,d:d});
+    });
+    up.sort(function(a,b){return a.date.localeCompare(b.date);});
+    up.slice(0,5).forEach(function(u){
+      rows.push({cls:u.d<=3?"soon":"calm",mark:"▼",text:u.label,when:fmt(u.date)});
+    });
+    if(!rows.length){
+      rows.push({cls:"calm",mark:"・",text:"差し迫った用件なし",when:""});
+    }
+    rows.forEach(function(r){
+      var row=el("div","row "+r.cls);
+      row.appendChild(el("span","mark"+(r.cls==="od"?" blink":""),r.mark));
+      row.appendChild(el("span","txt",r.text));
+      if(r.when) row.appendChild(el("span","when px",r.when));
+      box.appendChild(row);
+    });
+    if(over.length) win.classList.add("danger");
+    else if(up.some(function(u){return u.d<=3;})) win.classList.add("warn");
+  }
+
+  function nameOf(rid){
+    var r=state.realms.filter(function(x){return x.id===rid;})[0];
+    return r?r.name:rid;
+  }
+
+  function realmCard(r){
+    var tone=realmTone(r.id);
+    var b=el("button","win card"+(tone?" "+tone:""));
+    b.type="button";
+    var h=el("div","cname"); h.appendChild(el("span",null,r.name));
+    b.appendChild(h);
+    b.appendChild(el("div","role",r.role));
+    var qs=questsOf(r.id);
+    var dl=el("dl");
+    if(r.type==="監査"){
+      var ps=patrolsOf(r.id);
+      var p=ps[0];
+      dl.appendChild(el("dt",null,"巡察"));
+      dl.appendChild(el("dd",null,p?fmt(p.date):"未登録"));
+      var prep=qs.filter(function(q){return q.parentId&&p&&q.parentId===p.id;});
+      var doneN=prep.filter(function(q){return q.status==="done";}).length;
+      dl.appendChild(el("dt",null,"支度"));
+      dl.appendChild(el("dd",null,prep.length?(doneN+"/"+prep.length):"—"));
+      var other=qs.filter(function(q){return !q.parentId&&q.status!=="done";}).length;
+      if(other){
+        dl.appendChild(el("dt",null,"常時"));
+        dl.appendChild(el("dd",null,String(other)));
+      }
+    }else{
+      dl.appendChild(el("dt",null,"進行"));
+      dl.appendChild(el("dd",null,String(qs.filter(function(q){return q.status==="doing";}).length)));
+      dl.appendChild(el("dt",null,"未着手"));
+      dl.appendChild(el("dd",null,String(qs.filter(function(q){return q.status==="todo";}).length)));
+    }
+    b.appendChild(dl);
+    var nd=nextDue(r.id);
+    var nx=el("div","next");
+    nx.appendChild(el("span",null,"次の期日"));
+    var nb=el("b",null,nd?fmt(nd):"—"); nx.appendChild(nb);
+    b.appendChild(nx);
+    b.addEventListener("click",function(){open(r.id);});
+    return b;
+  }
+
+  function renderField(){
+    var ex=$("exec"), au=$("audit"), fs=$("forgeSlot");
+    ex.textContent=""; au.textContent=""; fs.textContent="";
+    renderRouteBanner(); renderGeneralsBanner();
+    state.realms.slice().sort(function(a,b){return (a.order||0)-(b.order||0);}).forEach(function(r){
+      if(r.type==="執行") ex.appendChild(realmCard(r));
+      else if(r.type==="監査") au.appendChild(realmCard(r));
+      else{
+        var b=el("button","win forge"); b.type="button";
+        var left=el("div");
+        left.appendChild(el("div","ttl","▶ "+r.name));
+        left.appendChild(el("div","note",r.role));
+        b.appendChild(left);
+        var n=questsOf(r.id).filter(function(q){return q.status!=="done";}).length;
+        b.appendChild(el("div","cnt",n+" 件"));
+        b.addEventListener("click",function(){open(r.id);});
+        fs.appendChild(b);
+      }
+    });
+  }
+
+  /* ---------- ルートマップ ---------- */
+  function currentFunnel(){
+    if(!state.funnels.length) return null;
+    var f=state.funnels.filter(function(x){return x.id===view.funnelId;})[0];
+    return f||state.funnels.slice().sort(function(a,b){return (a.order||0)-(b.order||0);})[0];
+  }
+  function byOrder(a,b){return (a.order||0)-(b.order||0);}
+  function entriesOf(fid){
+    return state.entries.filter(function(e){return e.funnelId===fid;}).sort(byOrder);
+  }
+  function mainModules(fid){
+    return state.modules.filter(function(m){return m.funnelId===fid&&!m.entryId;})
+      .sort(function(a,b){
+        var s=STAGES.indexOf(a.stage)-STAGES.indexOf(b.stage);
+        return s!==0?s:byOrder(a,b);
+      });
+  }
+  function entryModules(eid){
+    return state.modules.filter(function(m){return m.entryId===eid;}).sort(byOrder);
+  }
+  function totalAttend(fid){
+    var n=null;
+    entriesOf(fid).forEach(function(e){
+      if(typeof e.attend==="number"){ n=(n||0)+e.attend; }
+    });
+    return n;
+  }
+
+  /* 本線の欠けは全入口に効く。入口の欠けはその入口だけ。だから優先度が違う */
+  function routeGap(fid){
+    var main=mainModules(fid);
+    var post=main.filter(function(m){return m.stage!=="集客";});
+    var g=post.filter(function(m){return m.status!=="live";})[0];
+    if(g) return {label:"本道が途絶えている", where:g.stage+" / "+g.title};
+    var es=entriesOf(fid);
+    if(!es.filter(function(e){return e.status==="live";}).length)
+      return {label:"稼働中の入口がない", where:es.length?"フロントセミナー "+es.length+"本すべて普請中":"フロントセミナー未登録"};
+    var pre=main.filter(function(m){return m.stage==="集客";}).filter(function(m){return m.status!=="live";})[0];
+    if(pre) return {label:"集客の導が途絶えている", where:"集客 / "+pre.title};
+    return null;
+  }
+
+  function renderRouteBanner(){
+    var slot=$("routeSlot"); slot.textContent="";
+    var f=currentFunnel(); if(!f) return;
+    var b=el("button","win forge"); b.type="button";
+    var left=el("div");
+    left.appendChild(el("div","ttl","▶ モジュール管理"));
+    var g=routeGap(f.id);
+    left.appendChild(el("div","note", g?(g.label+" ： "+g.where):"本道も入口も稼働中"));
+    b.appendChild(left);
+    var es=entriesOf(f.id);
+    var liveE=es.filter(function(e){return e.status==="live";}).length;
+    b.appendChild(el("div","cnt","入口 "+liveE+" / "+es.length));
+    b.addEventListener("click",function(){openRoute(f.id);});
+    slot.appendChild(b);
+  }
+
+  function renderRoute(){
+    var host=$("routeView"); host.textContent="";
+    var f=currentFunnel(); if(!f){back();return;}
+    var b0=el("button","back","本営に戻る"); b0.type="button";
+    b0.addEventListener("click",back); host.appendChild(b0);
+
+    var w=el("div","win"); w.style.marginTop="12px";
+    var hd=el("div","rmhead");
+    hd.appendChild(el("h2",null,"モジュール管理"));
+    hd.appendChild(el("div","role","フロントセミナー（複数）→ 合流 → 教育 → "+f.name+"の申込"));
+    w.appendChild(hd);
+
+    if(state.funnels.length>1){
+      var sel=el("div","fsel"); sel.style.marginTop="10px";
+      state.funnels.slice().sort(byOrder).forEach(function(x){
+        var t=el("button","tab",x.name); t.type="button";
+        t.setAttribute("aria-selected",x.id===f.id?"true":"false");
+        t.addEventListener("click",function(){view.funnelId=x.id;view.editModule=null;view.editEntry=null;renderRoute();});
+        sel.appendChild(t);
+      });
+      w.appendChild(sel);
+    }
+
+    var g=routeGap(f.id);
+    var gap=el("div","gap");
+    if(g){
+      gap.appendChild(document.createTextNode(g.label+" ： "));
+      gap.appendChild(el("b",null,g.where));
+    }else gap.textContent="本道も入口も稼働中。";
+    w.appendChild(gap);
+
+    var main=mainModules(f.id);
+
+    /* 集客導線（共通・入口の手前） */
+    var pre=main.filter(function(m){return m.stage==="集客";});
+    if(pre.length){
+      var s0=el("div","stage");
+      s0.appendChild(el("div","stagename","集客（共通）"));
+      var u0=el("ul","mlist");
+      pre.forEach(function(m){u0.appendChild(moduleRow(m,null));});
+      s0.appendChild(u0); w.appendChild(s0);
+      w.appendChild(el("div","arrow","▼"));
+    }
+
+    /* 入口 ─ フロントセミナー（複数） */
+    var es=entriesOf(f.id);
+    var sec=el("div","stage");
+    sec.appendChild(el("div","stagename","入口 ― フロントセミナー"));
+    var grid=el("div","entries");
+    es.forEach(function(e){grid.appendChild(entryCard(e));});
+    sec.appendChild(grid);
+    sec.appendChild(addEntryForm(f));
+    w.appendChild(sec);
+
+    /* 合流 */
+    var tot=totalAttend(f.id);
+    var merge=el("div","merge");
+    merge.appendChild(el("span","mlabel","合流"));
+    merge.appendChild(el("span","mval",(tot===null?"参加 未入力":"参加 合計 "+tot.toLocaleString("ja-JP"))));
+    w.appendChild(merge);
+
+    /* 本線 ─ 教育 / 販売 / 継続 */
+    var prevNum=tot;
+    STAGES.forEach(function(st){
+      if(st==="集客") return;
+      var ms=main.filter(function(m){return m.stage===st;});
+      if(!ms.length) return;
+      var s=el("div","stage");
+      s.appendChild(el("div","stagename",st));
+      var ul=el("ul","mlist");
+      ms.forEach(function(m){
+        ul.appendChild(moduleRow(m,prevNum));
+        if(typeof m.metricValue==="number") prevNum=m.metricValue;
+      });
+      s.appendChild(ul); w.appendChild(s);
+      if(st!=="継続"&&main.some(function(m){return STAGES.indexOf(m.stage)>STAGES.indexOf(st);}))
+        w.appendChild(el("div","arrow","▼"));
+    });
+
+    w.appendChild(addModuleForm(f));
+    host.appendChild(w);
+    host.appendChild(advisorWindow("route",f.id));
+  }
+
+  /* ── 入口カード ── */
+  function entryCard(e){
+    var box=el("div","win entry "+(e.status||"todo"));
+    var h=el("div","ehead");
+    h.appendChild(el("span","mk",(MSTATUS[e.status]||MSTATUS.todo)[0]));
+    h.appendChild(el("span","ename",e.name));
+    box.appendChild(h);
+    var meta=el("div","emeta");
+    meta.appendChild(el("span",null,e.heldOn?fmt(e.heldOn):"日時未定"));
+    var rate="";
+    if(typeof e.apply==="number"&&typeof e.attend==="number"&&e.apply>0)
+      rate="  "+Math.round(e.attend/e.apply*100)+"%";
+    meta.appendChild(el("span","enum",
+      (typeof e.apply==="number"?"申込 "+e.apply:"—")+
+      (typeof e.attend==="number"?"　参加 "+e.attend:"")+rate));
+    box.appendChild(meta);
+
+    var ul=el("ul","mlist");
+    var ms=entryModules(e.id);
+    if(!ms.length) ul.appendChild(el("li","empty","構成なし"));
+    ms.forEach(function(m){ul.appendChild(moduleRow(m,null));});
+    box.appendChild(ul);
+
+    var tools=el("div","tools");
+    tools.appendChild(actBtn(view.editEntry===e.id?"閉じる":"改める",function(){
+      view.editEntry=view.editEntry===e.id?null:e.id; renderRoute();
+    }));
+    tools.appendChild(actBtn("構成を加える",function(){
+      var t=prompt("構成の名"); if(!t)return;
+      addModule({funnelId:e.funnelId,entryId:e.id,stage:"フロント",title:t.trim(),
+        order:entryModules(e.id).length+1});
+    }));
+    var d=actBtn("破棄",function(){removeEntry(e);}); d.classList.add("del");
+    tools.appendChild(d);
+    box.appendChild(tools);
+
+    if(view.editEntry===e.id) box.appendChild(entryEditor(e));
+    return box;
+  }
+
+  function entryEditor(e){
+    var f=el("form","medit");
+    var l1=el("div","line");
+    var ln=el("label",null,null); ln.className="tline"; ln.appendChild(document.createTextNode("名"));
+    var ni=document.createElement("input"); ni.type="text"; ni.id="e-nm-"+e.id; ni.value=e.name||"";
+    ln.appendChild(ni); l1.appendChild(ln);
+    f.appendChild(l1);
+
+    var l2=el("div","line");
+    var ls=el("label",null,null); ls.appendChild(document.createTextNode("状態"));
+    var ss=document.createElement("select"); ss.id="e-st-"+e.id;
+    Object.keys(MSTATUS).forEach(function(k){
+      var o=document.createElement("option"); o.value=k; o.textContent=MSTATUS[k][1];
+      if((e.status||"todo")===k)o.selected=true; ss.appendChild(o);
+    });
+    ls.appendChild(ss); l2.appendChild(ls);
+
+    var ld=el("label",null,null); ld.appendChild(document.createTextNode("開催日"));
+    var di=document.createElement("input"); di.type="date"; di.id="e-dt-"+e.id; di.value=e.heldOn||"";
+    ld.appendChild(di); l2.appendChild(ld);
+
+    var la=el("label",null,null); la.appendChild(document.createTextNode("申込"));
+    var ai=document.createElement("input"); ai.type="number"; ai.id="e-ap-"+e.id;
+    ai.style.width="100px"; ai.value=(typeof e.apply==="number")?e.apply:"";
+    la.appendChild(ai); l2.appendChild(la);
+
+    var lb=el("label",null,null); lb.appendChild(document.createTextNode("参加"));
+    var bi=document.createElement("input"); bi.type="number"; bi.id="e-at-"+e.id;
+    bi.style.width="100px"; bi.value=(typeof e.attend==="number")?e.attend:"";
+    lb.appendChild(bi); l2.appendChild(lb);
+    f.appendChild(l2);
+
+    var go=el("button","go","記す"); go.type="submit"; f.appendChild(go);
+    f.addEventListener("submit",function(ev){
+      ev.preventDefault();
+      var a=ai.value.trim(), b=bi.value.trim();
+      saveEntry(e,{name:ni.value.trim()||e.name,status:ss.value,heldOn:di.value||null,
+        apply:a===""?null:Number(a),attend:b===""?null:Number(b),
+        metricAt:new Date().toISOString()});
+      view.editEntry=null;
+    });
+    return f;
+  }
+
+  function addEntryForm(f0){
+    var f=el("form","add");
+    var l=el("div","line");
+    var lt=el("label",null,null); lt.className="tline";
+    lt.appendChild(document.createTextNode("入口を加える"));
+    var ti=document.createElement("input"); ti.type="text"; ti.id="e-new"; ti.required=true;
+    ti.placeholder="セミナー名";
+    lt.appendChild(ti); l.appendChild(lt);
+    f.appendChild(l);
+    var go=el("button","go","加える"); go.type="submit"; f.appendChild(go);
+    f.addEventListener("submit",function(ev){
+      ev.preventDefault();
+      var t=ti.value.trim(); if(!t)return;
+      var e={id:uid(),funnelId:f0.id,name:t,status:"todo",heldOn:null,
+        apply:null,attend:null,order:entriesOf(f0.id).length+1};
+      state.entries.push(e); ti.value=""; renderRoute();
+      if(db) db.doc("entries/"+e.id).set(e).catch(warn);
+      ["申込LP","申込フォーム","リマインド","セミナー本番","アーカイブ配信"].forEach(function(t2,i){
+        addModule({funnelId:f0.id,entryId:e.id,stage:"フロント",title:t2,order:i+1},true);
+      });
+      renderRoute();
+    });
+    return f;
+  }
+
+  function saveEntry(e,patch){
+    var n=Object.assign({},e,patch);
+    var i=state.entries.findIndex(function(x){return x.id===e.id;});
+    if(i>=0)state.entries[i]=n;
+    renderRoute();
+    if(db) db.doc("entries/"+e.id).set(n).catch(warn);
+  }
+  function removeEntry(e){
+    var kids=entryModules(e.id);
+    state.entries=state.entries.filter(function(x){return x.id!==e.id;});
+    state.modules=state.modules.filter(function(m){return m.entryId!==e.id;});
+    if(view.editEntry===e.id)view.editEntry=null;
+    renderRoute();
+    if(db){
+      db.doc("entries/"+e.id).delete().catch(warn);
+      kids.forEach(function(m){db.doc("modules/"+m.id).delete().catch(warn);});
+    }
+  }
+
+  /* ── モジュール ── */
+  function addModule(d,quiet){
+    var m={id:uid(),funnelId:d.funnelId,entryId:d.entryId||null,stage:d.stage,title:d.title,
+      status:"todo",realmId:null,url:null,metricLabel:null,metricValue:null,metricAt:null,
+      order:d.order||1};
+    state.modules.push(m);
+    if(!quiet) renderRoute();
+    if(db) db.doc("modules/"+m.id).set(m).catch(warn);
+  }
+
+  function moduleRow(m,prevNum){
+    var li=el("li","mrow "+(m.status||"todo"));
+    li.appendChild(el("span","mk",(MSTATUS[m.status]||MSTATUS.todo)[0]));
+    var t=el("span","ttl"); t.appendChild(document.createTextNode(m.title));
+    if(m.realmId) t.appendChild(el("span","own","["+nameOf(m.realmId)+"]"));
+    li.appendChild(t);
+    var num=el("span","num");
+    if(typeof m.metricValue==="number"){
+      var s=(m.metricLabel||"")+" "+m.metricValue.toLocaleString("ja-JP");
+      if(typeof prevNum==="number"&&prevNum>0) s+="  ("+Math.round(m.metricValue/prevNum*100)+"%)";
+      num.textContent=s;
+    }else num.textContent="";
+    li.appendChild(num);
+
+    var tools=el("div","tools");
+    if(m.url){
+      var a=document.createElement("a"); a.href=m.url; a.target="_blank"; a.rel="noopener";
+      a.textContent="UTAGE"; tools.appendChild(a);
+    }
+    tools.appendChild(actBtn(view.editModule===m.id?"閉じる":"改める",function(){
+      view.editModule=view.editModule===m.id?null:m.id; renderRoute();
+    }));
+    var d=actBtn("破棄",function(){removeModule(m);}); d.classList.add("del");
+    tools.appendChild(d);
+    li.appendChild(tools);
+
+    if(view.editModule===m.id) li.appendChild(moduleEditor(m));
+    return li;
+  }
+
+  function moduleEditor(m){
+    var f=el("form","medit");
+    var l1=el("div","line");
+    var ls=el("label",null,null); ls.appendChild(document.createTextNode("状態"));
+    var ss=document.createElement("select"); ss.id="m-st-"+m.id;
+    Object.keys(MSTATUS).forEach(function(k){
+      var o=document.createElement("option"); o.value=k; o.textContent=MSTATUS[k][1];
+      if((m.status||"todo")===k)o.selected=true; ss.appendChild(o);
+    });
+    ls.appendChild(ss); l1.appendChild(ls);
+
+    var lr=el("label",null,null); lr.appendChild(document.createTextNode("担当"));
+    var rs=document.createElement("select"); rs.id="m-rl-"+m.id;
+    var o0=document.createElement("option"); o0.value=""; o0.textContent="なし"; rs.appendChild(o0);
+    state.realms.forEach(function(r){
+      var o=document.createElement("option"); o.value=r.id; o.textContent=r.name;
+      if(m.realmId===r.id)o.selected=true; rs.appendChild(o);
+    });
+    lr.appendChild(rs); l1.appendChild(lr);
+    f.appendChild(l1);
+
+    if(!m.entryId){
+      var l2=el("div","line");
+      var ll=el("label",null,null); ll.appendChild(document.createTextNode("数値の名"));
+      var li2=document.createElement("input"); li2.type="text"; li2.id="m-ml-"+m.id;
+      li2.value=m.metricLabel||""; li2.placeholder="開封"; li2.style.width="150px";
+      ll.appendChild(li2); l2.appendChild(ll);
+      var lv=el("label",null,null); lv.appendChild(document.createTextNode("数値"));
+      var vi=document.createElement("input"); vi.type="number"; vi.id="m-mv-"+m.id;
+      vi.value=(typeof m.metricValue==="number")?m.metricValue:""; vi.style.width="110px";
+      lv.appendChild(vi); l2.appendChild(lv);
+      f.appendChild(l2);
+      f._ml=li2; f._mv=vi;
+    }
+
+    var l3=el("div","line");
+    var lu=el("label",null,null); lu.className="tline"; lu.appendChild(document.createTextNode("UTAGEのURL"));
+    var ui=document.createElement("input"); ui.type="url"; ui.id="m-ur-"+m.id;
+    ui.value=m.url||""; ui.placeholder="https://...";
+    lu.appendChild(ui); l3.appendChild(lu);
+    f.appendChild(l3);
+
+    var go=el("button","go","記す"); go.type="submit"; f.appendChild(go);
+    f.addEventListener("submit",function(e){
+      e.preventDefault();
+      var patch={status:ss.value,realmId:rs.value||null,url:ui.value.trim()||null};
+      if(f._mv){
+        var v=f._mv.value.trim();
+        patch.metricLabel=f._ml.value.trim()||null;
+        patch.metricValue=v===""?null:Number(v);
+        patch.metricAt=v===""?null:new Date().toISOString();
+      }
+      saveModule(m,patch);
+      view.editModule=null;
+    });
+    return f;
+  }
+
+  function addModuleForm(f0){
+    var f=el("form","add");
+    var l1=el("div","line");
+    var lt=el("label",null,null); lt.className="tline";
+    lt.appendChild(document.createTextNode("本道に構成を加える"));
+    var ti=document.createElement("input"); ti.type="text"; ti.id="m-new-title"; ti.required=true;
+    ti.placeholder="構成の名";
+    lt.appendChild(ti); l1.appendChild(lt);
+    var lsg=el("label",null,null); lsg.appendChild(document.createTextNode("段"));
+    var sg=document.createElement("select"); sg.id="m-new-stage";
+    STAGES.forEach(function(s){var o=document.createElement("option");o.value=s;o.textContent=s;sg.appendChild(o);});
+    lsg.appendChild(sg); l1.appendChild(lsg);
+    f.appendChild(l1);
+    var go=el("button","go","加える"); go.type="submit"; f.appendChild(go);
+    f.addEventListener("submit",function(e){
+      e.preventDefault();
+      var t=ti.value.trim(); if(!t)return;
+      var st=sg.value;
+      var sib=mainModules(f0.id).filter(function(m){return m.stage===st;});
+      ti.value="";
+      addModule({funnelId:f0.id,entryId:null,stage:st,title:t,order:sib.length+1});
+    });
+    return f;
+  }
+
+  function saveModule(m,patch){
+    var n=Object.assign({},m,patch);
+    var i=state.modules.findIndex(function(x){return x.id===m.id;});
+    if(i>=0)state.modules[i]=n;
+    renderRoute();
+    if(db) db.doc("modules/"+m.id).set(n).catch(warn);
+  }
+  function removeModule(m){
+    state.modules=state.modules.filter(function(x){return x.id!==m.id;});
+    if(view.editModule===m.id)view.editModule=null;
+    renderRoute();
+    if(db) db.doc("modules/"+m.id).delete().catch(warn);
+  }
+
+  var TABS=[["main","主命"],["sub","策"],["daily","日課"],["done","戦果"]];
+
+  function renderRealm(){
+    var host=$("realmView"); host.textContent="";
+    var r=state.realms.filter(function(x){return x.id===view.realmId;})[0];
+    if(!r){back();return;}
+    var back0=el("button","back","本営に戻る"); back0.type="button";
+    back0.addEventListener("click",back);
+    host.appendChild(back0);
+
+    var tone=realmTone(r.id);
+    var w=el("div","win"+(tone?" "+tone:"")); w.style.marginTop="12px";
+    var hd=el("div","rhead");
+    hd.appendChild(el("h2",null,r.name));
+    hd.appendChild(el("div","role",r.role));
+    w.appendChild(hd);
+
+    if(r.type==="監査"){
+      patrolsOf(r.id).slice(0,3).forEach(function(p){
+        var pb=el("div","patrol");
+        pb.appendChild(el("span","pd",fmt(p.date)));
+        pb.appendChild(el("span","pn",p.title));
+        var prep=questsOf(r.id).filter(function(q){return q.parentId===p.id;});
+        var dn=prep.filter(function(q){return q.status==="done";}).length;
+        pb.appendChild(el("span","pc",prep.length?("支度 "+dn+"/"+prep.length):"支度なし"));
+        w.appendChild(pb);
+      });
+    }
+
+    var tabs=el("div","tabs"); tabs.setAttribute("role","tablist");
+    TABS.forEach(function(t){
+      var b=el("button","tab",t[1]); b.type="button"; b.setAttribute("role","tab");
+      b.setAttribute("aria-selected",view.tab===t[0]?"true":"false");
+      b.addEventListener("click",function(){view.tab=t[0];renderRealm();});
+      tabs.appendChild(b);
+    });
+    w.appendChild(tabs);
+
+    var list=el("ul","qlist");
+    var qs=questsOf(r.id).filter(function(q){
+      return view.tab==="done"?q.status==="done":(q.status!=="done"&&q.kind===view.tab);
+    }).sort(function(a,b){
+      var A=a.due||"9999-99-99", B=b.due||"9999-99-99";
+      if(A!==B) return A.localeCompare(B);
+      return (b.difficulty||1)-(a.difficulty||1);
+    });
+    if(!qs.length){
+      list.appendChild(el("li","empty",view.tab==="done"?"戦果なし":"任務なし"));
+    }
+    qs.forEach(function(q){list.appendChild(questRow(q));});
+    w.appendChild(list);
+
+    if(view.tab!=="done") w.appendChild(addForm(r));
+    host.appendChild(w);
+    host.appendChild(advisorWindow("realm",r.id));
+  }
+
+  function questRow(q){
+    var over=isOverdue(q);
+    var d=q.due?daysUntil(q.due):null;
+    var cls="qrow "+q.status+(over?" over":(d!==null&&d>=0&&d<=3?" soon":""));
+    var li=el("li",cls);
+    li.appendChild(el("span","mk",q.status==="done"?"✓":over?"✖":q.status==="doing"?"▶":"・"));
+    var t=el("span","ttl"); t.appendChild(document.createTextNode(q.title));
+    if(q.assignee) t.appendChild(el("span","badge","担 "+q.assignee));
+    var reps=reportsOf(q.id);
+    if(reps.length) t.appendChild(el("span","badge rep","報 "+reps.length));
+    li.appendChild(t);
+    var meta=[];
+    if(q.due) meta.push(fmt(q.due));
+    meta.push("★"+(q.difficulty||1));
+    li.appendChild(el("span","meta",meta.join("　")));
+    var acts=el("div","acts");
+    if(q.status!=="done"){
+      if(q.status==="todo") acts.appendChild(actBtn("出陣",function(){setStatus(q,"doing");}));
+      acts.appendChild(actBtn("討取",function(){complete(q);}));
+      acts.appendChild(actBtn(view.orderQuest===q.id?"閉じる":"命じる",function(){
+        view.orderQuest=view.orderQuest===q.id?null:q.id; view.openReports=null; view.cmdQuest=null; render();
+      }));
+    }else{
+      acts.appendChild(actBtn("帰陣",function(){setStatus(q,"todo");}));
+    }
+    if(reps.length) acts.appendChild(actBtn(view.openReports===q.id?"閉じる":"報告を読む",function(){
+      view.openReports=view.openReports===q.id?null:q.id; view.orderQuest=null; view.cmdQuest=null; render();
+    }));
+    acts.appendChild(actBtn(view.cmdQuest===q.id?"閉じる":"命令書",function(){
+      view.cmdQuest=view.cmdQuest===q.id?null:q.id; view.orderQuest=null; view.openReports=null; render();
+    }));
+    var del=actBtn("破棄",function(){remove(q);}); del.classList.add("del");
+    acts.appendChild(del);
+    li.appendChild(acts);
+    if(view.orderQuest===q.id) li.appendChild(orderPanel(q));
+    if(view.cmdQuest===q.id) li.appendChild(cmdPanel(q));
+    if(view.openReports===q.id){
+      reps.forEach(function(r){
+        var b=el("div","repbox");
+        var h=el("div","rephead");
+        h.appendChild(el("span",null,r.generalName+"　"+(r.at||"").slice(0,10)));
+        h.appendChild(copyAct(function(){return r.text;}));
+        var x=actBtn("破棄",function(){removeReport(r);}); x.classList.add("del");
+        h.appendChild(x);
+        b.appendChild(h);
+        b.appendChild(el("pre","reptext",r.text));
+        li.appendChild(b);
+      });
+    }
+    return li;
+  }
+  function actBtn(label,fn){
+    var b=el("button","act",label); b.type="button";
+    b.addEventListener("click",fn); return b;
+  }
+
+  function addForm(r){
+    var f=el("form","add");
+    var l1=el("div","line");
+    var lt=el("label",null,null); lt.className="tline";
+    lt.appendChild(document.createTextNode("任務"));
+    var ti=document.createElement("input"); ti.type="text"; ti.id="q-title-"+r.id; ti.required=true;
+    ti.placeholder="何をするか";
+    lt.appendChild(ti); l1.appendChild(lt);
+    f.appendChild(l1);
+
+    var l2=el("div","line");
+    var lk=el("label",null,null); lk.appendChild(document.createTextNode("種別"));
+    var ks=document.createElement("select"); ks.id="q-kind-"+r.id;
+    [["main","主命"],["sub","策"],["daily","日課"]].forEach(function(o){
+      var op=document.createElement("option"); op.value=o[0]; op.textContent=o[1];
+      if(view.tab===o[0])op.selected=true; ks.appendChild(op);
+    });
+    lk.appendChild(ks); l2.appendChild(lk);
+
+    var ld=el("label",null,null); ld.appendChild(document.createTextNode("期日"));
+    var di=document.createElement("input"); di.type="date"; di.id="q-due-"+r.id;
+    ld.appendChild(di); l2.appendChild(ld);
+
+    var lf=el("label",null,null); lf.appendChild(document.createTextNode("難度"));
+    var fs=document.createElement("select"); fs.id="q-diff-"+r.id;
+    [1,2,3,4,5].forEach(function(n){
+      var op=document.createElement("option"); op.value=n; op.textContent="★".repeat(n);
+      if(n===2)op.selected=true; fs.appendChild(op);
+    });
+    lf.appendChild(fs); l2.appendChild(lf);
+    f.appendChild(l2);
+
+    var go=el("button","go","任務を加える"); go.type="submit";
+    f.appendChild(go);
+
+    f.addEventListener("submit",function(e){
+      e.preventDefault();
+      var t=ti.value.trim(); if(!t)return;
+      create({realmId:r.id,title:t,kind:ks.value,due:di.value||null,difficulty:+fs.value});
+      ti.value=""; di.value="";
+    });
+    return f;
+  }
+
+  function render(){
+    renderStatus(); renderOtsuge();
+    $("field").classList.toggle("hidden",view.mode!=="field");
+    $("realmView").classList.toggle("hidden",view.mode!=="realm");
+    $("routeView").classList.toggle("hidden",view.mode!=="route");
+    $("genView").classList.toggle("hidden",view.mode!=="generals");
+    if(view.mode==="field") renderField();
+    else if(view.mode==="realm") renderRealm();
+    else if(view.mode==="generals") renderGenerals();
+    else renderRoute();
+  }
+  function open(rid){view.mode="realm";view.realmId=rid;view.tab="main";render();window.scrollTo(0,0);}
+  function openRoute(fid){view.mode="route";view.funnelId=fid;view.editModule=null;render();window.scrollTo(0,0);}
+  function back(){view.mode="field";view.realmId=null;view.editModule=null;view.editEntry=null;view.editGeneral=null;view.orderQuest=null;view.openReports=null;view.cmdQuest=null;render();}
+  document.addEventListener("keydown",function(e){
+    if(e.key==="Escape"&&view.mode!=="field"){back();}
+  });
+
+  /* ---------- 書き込み ---------- */
+  function uid(){
+    return (window.crypto&&crypto.randomUUID)?crypto.randomUUID().replace(/-/g,"").slice(0,16)
+      :(Date.now().toString(36)+Math.random().toString(36).slice(2,8));
+  }
+  function localUpsert(q){
+    var i=state.quests.findIndex(function(x){return x.id===q.id;});
+    if(i<0)state.quests.push(q); else state.quests[i]=q;
+    render();
+  }
+  function create(data){
+    var q={id:uid(),realmId:data.realmId,title:data.title,kind:data.kind,status:"todo",
+      due:data.due,difficulty:data.difficulty,parentId:null,
+      createdAt:new Date().toISOString(),completedAt:null};
+    localUpsert(q);
+    if(db) db.doc("quests/"+q.id).set(q).catch(warn);
+  }
+  function setStatus(q,s){
+    var n=Object.assign({},q,{status:s,completedAt:s==="done"?new Date().toISOString():null});
+    localUpsert(n);
+    if(db) db.doc("quests/"+q.id).set(n).catch(warn);
+  }
+  function complete(q){
+    if(q.status==="done")return;
+    setStatus(q,"done");
+    flash(q.title+" を果たした"+(q.kind==="main"?"　― 制圧":q.kind==="sub"?"　― 戦勝":""));
+  }
+
+  function remove(q){
+    state.quests=state.quests.filter(function(x){return x.id!==q.id;});
+    render();
+    if(db) db.doc("quests/"+q.id).delete().catch(warn);
+  }
+  function warn(e){
+    var n=$("dbNotice"); n.classList.remove("hidden");
+    n.textContent="※ 保存できませんでした（"+(e&&e.code?e.code:"unknown")+"）。画面を読み込み直してください。";
+  }
+  var flashTimer=null;
+  function flash(msg){
+    var n=$("dbNotice"); n.classList.remove("hidden"); n.textContent="＊ "+msg;
+    clearTimeout(flashTimer);
+    flashTimer=setTimeout(function(){n.classList.add("hidden");},3200);
+  }
+
+  /* ---------- 写す（Claude Codeへ渡す） ---------- */
+  function copyText(t){
+    var ok=function(){flash("写しました。Claude Codeに貼れます。");};
+    if(navigator.clipboard&&navigator.clipboard.writeText){
+      navigator.clipboard.writeText(t).then(ok,function(){copyFallback(t);});
+    }else copyFallback(t);
+  }
+  function copyFallback(t){
+    var ta=document.createElement("textarea");
+    ta.value=t; ta.setAttribute("readonly","");
+    ta.style.position="fixed"; ta.style.top="-1000px"; ta.style.opacity="0";
+    document.body.appendChild(ta); ta.select(); ta.setSelectionRange(0,t.length);
+    try{ document.execCommand("copy"); flash("写しました。Claude Codeに貼れます。"); }
+    catch(e){ flash("写せませんでした。文面を選んで手で写してください。"); }
+    document.body.removeChild(ta);
+  }
+  function copyAct(getText){ return actBtn("写す",function(){copyText(getText());}); }
+
+  var QKIND={main:"主命",sub:"策",daily:"日課"};
+  function orderSheet(q){
+    var r=state.realms.filter(function(x){return x.id===q.realmId;})[0];
+    var L=[];
+    L.push("# 依頼\n"+q.title);
+    L.push("# 背景\n領地: "+(r?(r.name+"（"+r.role+"）"):"不明")
+      +"\n種別: "+(QKIND[q.kind]||q.kind)+"　難度: ★"+(q.difficulty||1)
+      +"　期日: "+(q.due||"なし")
+      +(q.assignee?("\n担当: "+q.assignee):"")
+      +"\n今日: "+TODAY);
+    var paths=docsFor("realm",q.realmId).filter(function(d){return d.on&&d.kind==="path"&&d.path;});
+    L.push("# 読んでほしいファイル\n"+(paths.length
+      ?paths.map(function(d){return "- "+d.path;}).join("\n")
+      :"（未指定。書庫の「場所の控え」に書いておくとここに並びます）"));
+    var reps=reportsOf(q.id);
+    if(reps.length){
+      var t=reps[0].text;
+      L.push("# 配下の下書き（"+reps[0].generalName+"）\n"+(t.length>2000?t.slice(0,2000)+"\n…（以下略）":t));
+    }
+    L.push("# 求めるもの\n（ここに、何をどこまでやってほしいかを書き足してください）");
+    return L.join("\n\n");
+  }
+  function cmdPanel(q){
+    var box=el("div","orderbox");
+    var text=orderSheet(q);
+    var ta=document.createElement("textarea");
+    ta.rows=12; ta.readOnly=true; ta.id="cmd-"+q.id; ta.value=text;
+    box.appendChild(ta);
+    var row=el("div","adrow");
+    var go=el("button","go","写す"); go.type="button";
+    go.addEventListener("click",function(){copyText(text);});
+    row.appendChild(go);
+    row.appendChild(el("span","dsize","Claude Codeに貼り付けて使います。パスは書庫の「場所の控え」から拾っています。"));
+    box.appendChild(row);
+    return box;
+  }
+
+  /* ---------- 配下武将 ---------- */
+  var orders={};
+  function ordState(qid){return orders[qid]||(orders[qid]={draft:"",generalId:"",out:"",busy:false,note:"",ctl:null});}
+  function paintOrder(qid){
+    var st=ordState(qid);
+    var e=document.getElementById("ordout-"+qid); if(e)e.textContent=st.out;
+    var n=document.getElementById("ordnote-"+qid); if(n)n.textContent=st.note;
+  }
+  function generalsSorted(){return state.generals.slice().sort(byOrder);}
+  function generalById(id){return state.generals.filter(function(g){return g.id===id;})[0]||null;}
+  function reportsOf(qid){
+    return state.reports.filter(function(r){return r.questId===qid;})
+      .sort(function(a,b){return (b.at||"").localeCompare(a.at||"");});
+  }
+
+  function renderGeneralsBanner(){
+    var slot=$("genSlot"); slot.textContent="";
+    var b=el("button","win forge"); b.type="button";
+    var left=el("div");
+    left.appendChild(el("div","ttl","▶ 武将一覧"));
+    left.appendChild(el("div","note","任務を委ねる相手。得手と命の受け方を持ち、命を受けて成果を書く"));
+    b.appendChild(left);
+    b.appendChild(el("div","cnt",state.generals.length+" 人"));
+    b.addEventListener("click",function(){view.mode="generals";view.editGeneral=null;render();window.scrollTo(0,0);});
+    slot.appendChild(b);
+  }
+
+  function renderGenerals(){
+    var host=$("genView"); host.textContent="";
+    var b0=el("button","back","本営に戻る"); b0.type="button";
+    b0.addEventListener("click",back); host.appendChild(b0);
+    var w=el("div","win"); w.style.marginTop="12px";
+    var hd=el("div","rmhead");
+    hd.appendChild(el("h2",null,"武将一覧"));
+    hd.appendChild(el("div","role","名・得手・命の受け方を定める。命の受け方がそのままClaudeへの指示になる"));
+    w.appendChild(hd);
+
+    var ul=el("ul","glist");
+    generalsSorted().forEach(function(g){
+      var li=el("li","grow");
+      var h=el("div","ghead");
+      h.appendChild(el("span","gname",g.name));
+      h.appendChild(el("span","gskill",g.skill||""));
+      li.appendChild(h);
+      var tools=el("div","tools");
+      tools.appendChild(actBtn(view.editGeneral===g.id?"閉じる":"改める",function(){
+        view.editGeneral=view.editGeneral===g.id?null:g.id;render();
+      }));
+      var d=actBtn("放つ",function(){removeGeneral(g);}); d.classList.add("del");
+      tools.appendChild(d);
+      li.appendChild(tools);
+      if(view.editGeneral===g.id) li.appendChild(generalEditor(g));
+      ul.appendChild(li);
+    });
+    if(!state.generals.length) ul.appendChild(el("li","empty","配下なし"));
+    w.appendChild(ul);
+
+    if(view.editGeneral==="new") w.appendChild(generalEditor(null));
+    else{
+      var add=actBtn("武将を召し抱える",function(){view.editGeneral="new";render();});
+      var wrap=el("div","tools"); wrap.style.marginTop="14px"; wrap.appendChild(add);
+      w.appendChild(wrap);
+    }
+    host.appendChild(w);
+  }
+
+  function generalEditor(g){
+    var f=el("form","medit");
+    var l1=el("div","line");
+    var ln=el("label",null,null); ln.className="tline"; ln.appendChild(document.createTextNode("名"));
+    var ni=document.createElement("input"); ni.type="text"; ni.required=true;
+    ni.id="gn-"+(g?g.id:"new"); ni.value=g?g.name:"";
+    ln.appendChild(ni); l1.appendChild(ln);
+    f.appendChild(l1);
+
+    var ls=el("label",null,null); ls.appendChild(document.createTextNode("得手（一言）"));
+    var si=document.createElement("input"); si.type="text"; si.id="gs-"+(g?g.id:"new");
+    si.value=g?(g.skill||""):""; si.placeholder="記事の下書き／議事録／段取りの分解";
+    ls.appendChild(si); f.appendChild(ls);
+
+    var lp=el("label",null,null); lp.appendChild(document.createTextNode("命の受け方（AIへの指示）"));
+    var pa=document.createElement("textarea"); pa.rows=4; pa.id="gp-"+(g?g.id:"new");
+    pa.value=g?(g.prompt||""):"";
+    pa.placeholder="何を、どの形式で出すか。例：見出しと本文の下書きを出す。事実が不確かな箇所は［要確認］と印を付ける。";
+    lp.appendChild(pa); f.appendChild(lp);
+
+    var go=el("button","go","記す"); go.type="submit"; f.appendChild(go);
+    f.addEventListener("submit",function(e){
+      e.preventDefault();
+      var id=g?g.id:uid();
+      var n={id:id,name:ni.value.trim()||"無名",skill:si.value.trim(),
+        prompt:pa.value.trim(),order:g?(g.order||0):(state.generals.length+1)};
+      var i=state.generals.findIndex(function(x){return x.id===id;});
+      if(i>=0)state.generals[i]=n; else state.generals.push(n);
+      view.editGeneral=null; render();
+      if(db) db.doc("generals/"+id).set(n).catch(warn);
+    });
+    return f;
+  }
+  function removeGeneral(g){
+    state.generals=state.generals.filter(function(x){return x.id!==g.id;});
+    if(view.editGeneral===g.id)view.editGeneral=null;
+    render();
+    if(db) db.doc("generals/"+g.id).delete().catch(warn);
+  }
+
+  /* ── 任務に命を下す ── */
+  function orderPanel(q){
+    var st=ordState(q.id);
+    var box=el("div","orderbox");
+    var gs=generalsSorted();
+    if(!gs.length){ box.appendChild(el("div","adnote","配下がいません。本営の「配下」から召し抱えてください。")); return box; }
+
+    var l1=el("div","line");
+    var lg=el("label",null,null); lg.appendChild(document.createTextNode("誰に命じるか"));
+    var sel=document.createElement("select"); sel.id="ord-g-"+q.id;
+    gs.forEach(function(g){
+      var o=document.createElement("option"); o.value=g.id;
+      o.textContent=g.name+(g.skill?"（"+g.skill+"）":"");
+      if(st.generalId===g.id)o.selected=true; sel.appendChild(o);
+    });
+    if(!st.generalId) st.generalId=gs[0].id;
+    sel.addEventListener("change",function(){st.generalId=sel.value;render();});
+    lg.appendChild(sel); l1.appendChild(lg);
+    box.appendChild(l1);
+
+    var g0=generalById(st.generalId)||gs[0];
+    if(!sampler){ box.appendChild(el("div","adnote","この画面からClaudeに命じることができません。")); return box; }
+
+    var out=el("pre","aiout"); out.id="ordout-"+q.id; out.textContent=st.out; box.appendChild(out);
+    var note=el("div","adnote"); note.id="ordnote-"+q.id; note.textContent=st.note; box.appendChild(note);
+
+    var f=el("form","adform");
+    var ta=document.createElement("textarea"); ta.rows=2; ta.id="ord-t-"+q.id; ta.value=st.draft;
+    ta.placeholder="補足の指示（なくてもよい）";
+    ta.addEventListener("input",function(){st.draft=ta.value;});
+    f.appendChild(ta);
+    var row=el("div","adrow");
+    var go=el("button","go",st.busy?"執行中…":"命を下す"); go.type="submit"; go.disabled=st.busy;
+    row.appendChild(go);
+    if(st.busy) row.appendChild(actBtn("止める",function(){if(st.ctl)st.ctl.abort();}));
+    if(!st.busy&&st.out){
+      row.appendChild(actBtn("報告として残す",function(){keepReport(q,g0,st.out);}));
+      row.appendChild(copyAct(function(){return ordState(q.id).out;}));
+    }
+    f.appendChild(row);
+    f.addEventListener("submit",function(e){e.preventDefault();command(q,g0);});
+    box.appendChild(f);
+    return box;
+  }
+
+  function command(q,g){
+    var st=ordState(q.id);
+    if(st.busy) return;
+    var r=state.realms.filter(function(x){return x.id===q.realmId;})[0];
+    var KIND={main:"主命",sub:"策",daily:"日課"};
+    var body="あなたは「"+g.name+"」という配下の武将です。"
+      +(g.skill?("得手は「"+g.skill+"」。"):"")
+      +"芳川恒徳（よしかわつねのり）さんの命を受けて、任務の成果そのものを作ります。\n\n"
+      +(g.prompt?("【命の受け方】\n"+g.prompt+"\n\n"):"")
+      +"【作法】\n- 日本語。前置き・復唱・おだてはしない\n"
+      +"- 助言ではなく、そのまま使える成果物を出す（下書き・段取り・一覧・文面など）\n"
+      +"- 事実が確かめられない箇所は［要確認］と印を付け、勝手に埋めない\n\n"
+      +"【任務】\n"+q.title+"\n"
+      +"種別: "+(KIND[q.kind]||q.kind)+"　難度: ★"+(q.difficulty||1)
+      +"　期日: "+(q.due||"なし")+"\n\n"
+      +"【領地】\n"+(r?(r.name+"（"+r.role+"）"):"不明")+"\n"
+      +"【今日】\n"+TODAY;
+    var sc=shelfContext("realm",q.realmId);
+    if(sc) body+="\n\n"+sc;
+    if(st.draft.trim()) body+="\n\n【補足の指示】\n"+st.draft.trim();
+
+    st.busy=true; st.out=""; st.note="執行中…"; st.ctl=new AbortController();
+    render();
+    sampler(body,{cache:false,signal:st.ctl.signal,modelTier:"default",
+      onText:function(u){st.out=u.text;st.note="";paintOrder(q.id);}})
+      .then(function(res){st.out=res.text;st.busy=false;st.ctl=null;
+        st.note=res.truncated?"＊ 途中で切れました。小さく分けて命じてください。":"";render();})
+      .catch(function(e){st.busy=false;st.ctl=null;
+        if(e&&e.text)st.out=e.text;
+        var c=e&&e.code;
+        st.note=c==="cancelled"?"＊ 止めました。"
+          :c==="not_granted"?"＊ この画面からClaudeに命じる許可がありません。"
+          :c==="rate_limited"?"＊ 立て込んでいます。少し置いてから。"
+          :"＊ 成果を得られませんでした（"+(c||"unknown")+"）。";
+        render();});
+  }
+
+  function keepReport(q,g,text){
+    var r={id:uid(),questId:q.id,realmId:q.realmId,generalName:g.name,
+      text:text.slice(0,60000),at:new Date().toISOString()};
+    state.reports.push(r);
+    if(q.assignee!==g.name){
+      var nq=Object.assign({},q,{assignee:g.name});
+      localUpsert(nq);
+      if(db) db.doc("quests/"+q.id).set(nq).catch(warn);
+    }
+    ordState(q.id).note="＊ 報告として残しました。";
+    view.orderQuest=null; render();
+    if(db) db.doc("reports/"+r.id).set(r).catch(warn);
+  }
+  function removeReport(r){
+    state.reports=state.reports.filter(function(x){return x.id!==r.id;});
+    render();
+    if(db) db.doc("reports/"+r.id).delete().catch(warn);
+  }
+
+  /* ---------- 外部ライブラリの遅延読み込み ---------- */
+  var _libs={};
+  function loadScript(src){
+    return new Promise(function(res,rej){
+      if(_libs[src]==="ok") return res();
+      var el2=document.createElement("script");
+      el2.src=src; el2.async=true;
+      el2.onload=function(){_libs[src]="ok";res();};
+      el2.onerror=function(){_libs[src]="ng";rej(new Error("読み込めません: "+src));};
+      document.head.appendChild(el2);
+    });
+  }
+  function loadFirst(urls){
+    return urls.reduce(function(p,u){
+      return p.catch(function(){return loadScript(u);});
+    },Promise.reject());
+  }
+  var PDF_JS=["https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js",
+              "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.min.js"];
+  var PDF_WK={"3.11.174":"https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js",
+              "2.16.105":"https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.worker.min.js"};
+  var JSZIP_JS=["https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"];
+
+  /* ---------- 取り出し ---------- */
+  function extFor(name){var m=/\.([a-z0-9]+)$/i.exec(name||"");return m?m[1].toLowerCase():"";}
+
+  function pdfToText(file){
+    return loadFirst(PDF_JS).then(function(){
+      var lib=window.pdfjsLib;
+      if(!lib) throw new Error("pdf.jsを使えません");
+      var v=lib.version&&PDF_WK[lib.version];
+      lib.GlobalWorkerOptions.workerSrc=v||PDF_WK["3.11.174"];
+      return file.arrayBuffer();
+    }).then(function(buf){
+      return window.pdfjsLib.getDocument({data:new Uint8Array(buf)}).promise;
+    }).then(function(doc){
+      var pages=Math.min(doc.numPages,100), out=[], i=1;
+      function step(){
+        if(i>pages||out.join("\n").length>DOC_MAX) return Promise.resolve(out.join("\n\n"));
+        return doc.getPage(i).then(function(pg){return pg.getTextContent();})
+          .then(function(tc){
+            var last=null, buf2="";
+            tc.items.forEach(function(it){
+              if(last!==null&&it.transform&&Math.abs(it.transform[5]-last)>3) buf2+="\n";
+              buf2+=it.str;
+              if(it.transform) last=it.transform[5];
+            });
+            out.push(buf2); i++; return step();
+          });
+      }
+      return step();
+    });
+  }
+
+  function xmlParaText(xml){
+    var doc=new DOMParser().parseFromString(xml,"application/xml");
+    var ps=doc.getElementsByTagNameNS("*","p"), lines=[];
+    for(var i=0;i<ps.length;i++){
+      var ts=ps[i].getElementsByTagNameNS("*","t"), line="";
+      for(var j=0;j<ts.length;j++) line+=ts[j].textContent;
+      lines.push(line);
+    }
+    return lines.join("\n").replace(/\n{3,}/g,"\n\n");
+  }
+
+  function docxToText(file){
+    return loadFirst(JSZIP_JS)
+      .then(function(){return file.arrayBuffer();})
+      .then(function(buf){return window.JSZip.loadAsync(buf);})
+      .then(function(zip){
+        var f=zip.file("word/document.xml");
+        if(!f) throw new Error("本文が見つかりません");
+        return f.async("string");
+      }).then(xmlParaText);
+  }
+
+  function pptxToText(file){
+    return loadFirst(JSZIP_JS)
+      .then(function(){return file.arrayBuffer();})
+      .then(function(buf){return window.JSZip.loadAsync(buf);})
+      .then(function(zip){
+        var names=Object.keys(zip.files).filter(function(n){return /^ppt\/slides\/slide\d+\.xml$/.test(n);})
+          .sort(function(a,b){
+            var na=+(/slide(\d+)\.xml$/.exec(a)[1]), nb=+(/slide(\d+)\.xml$/.exec(b)[1]);
+            return na-nb;
+          });
+        if(!names.length) throw new Error("スライドが見つかりません");
+        return names.reduce(function(p,n,idx){
+          return p.then(function(acc){
+            return zip.file(n).async("string").then(function(x){
+              acc.push("## スライド "+(idx+1)+"\n"+xmlParaText(x));
+              return acc;
+            });
+          });
+        },Promise.resolve([])).then(function(a){return a.join("\n\n");});
+      });
+  }
+
+  /* ---------- 軍師の進言を武将に実行させる ---------- */
+  function execState(k){
+    var st=aiState(k);
+    if(!st.exec) st.exec={gid:"",text:null,out:"",busy:false,note:"",ctl:null,qid:""};
+    return st.exec;
+  }
+  function paintExec(k){
+    var ex=execState(k);
+    var o=document.getElementById("exout-"+k); if(o)o.textContent=ex.out;
+    var n=document.getElementById("exnote-"+k); if(n)n.textContent=ex.note;
+  }
+  function aiGenerals(){return generalsSorted();}
+
+  function execPanel(scope,tid,k){
+    var st=aiState(k), ex=execState(k);
+    var gs=aiGenerals();
+    var box=el("div","execbox");
+    var hd=el("div","shead");
+    hd.appendChild(el("span","slabel","進言を実行させる"));
+    hd.appendChild(el("span","scount",gs.length?("配下 "+gs.length+"人"):"配下なし"));
+    box.appendChild(hd);
+    if(!gs.length){
+      box.appendChild(el("div","adnote","本営の「配下」から武将を召し抱えてください。"));
+      return box;
+    }
+
+    var l1=el("div","line");
+    var lg=el("label",null,null); lg.appendChild(document.createTextNode("誰に実行させるか"));
+    var sel=document.createElement("select"); sel.id="ex-g-"+k;
+    gs.forEach(function(g){
+      var o=document.createElement("option"); o.value=g.id;
+      o.textContent=g.name+(g.skill?"（"+g.skill+"）":"");
+      if(ex.gid===g.id)o.selected=true; sel.appendChild(o);
+    });
+    if(!ex.gid) ex.gid=gs[0].id;
+    sel.addEventListener("change",function(){ex.gid=sel.value;});
+    lg.appendChild(sel); l1.appendChild(lg);
+    box.appendChild(l1);
+
+    var lt=el("label",null,null);
+    lt.appendChild(document.createTextNode("渡す指示（軍師の進言。削ったり書き足したりできます）"));
+    var ta=document.createElement("textarea"); ta.rows=6; ta.id="ex-t-"+k;
+    ta.value=(ex.text===null?st.out:ex.text);
+    ta.addEventListener("input",function(){ex.text=ta.value;});
+    lt.appendChild(ta); box.appendChild(lt);
+
+    var out=el("pre","aiout"); out.id="exout-"+k; out.textContent=ex.out; box.appendChild(out);
+    var note=el("div","adnote"); note.id="exnote-"+k; note.textContent=ex.note; box.appendChild(note);
+
+    var row=el("div","adrow");
+    var go=el("button","go",ex.busy?"執行中…":"命を下す"); go.type="button"; go.disabled=ex.busy;
+    go.addEventListener("click",function(){runExec(scope,tid,k);});
+    row.appendChild(go);
+    if(ex.busy) row.appendChild(actBtn("止める",function(){if(ex.ctl)ex.ctl.abort();}));
+    if(!ex.busy&&ex.text!==null) row.appendChild(actBtn("進言を写し直す",function(){ex.text=null;render();}));
+    if(!ex.busy&&ex.out){
+      row.appendChild(copyAct(function(){return execState(k).out;}));
+    }
+    box.appendChild(row);
+
+    if(!ex.busy&&ex.out&&scope==="realm"){
+      var l2=el("div","line");
+      var lq=el("label",null,null); lq.appendChild(document.createTextNode("報告を付ける任務"));
+      var qs=document.createElement("select"); qs.id="ex-q-"+k;
+      var o0=document.createElement("option"); o0.value="__new__"; o0.textContent="新しい任務として作る";
+      qs.appendChild(o0);
+      questsOf(tid).filter(function(q){return q.status!=="done";}).forEach(function(q){
+        var o=document.createElement("option"); o.value=q.id; o.textContent=q.title;
+        if(ex.qid===q.id)o.selected=true; qs.appendChild(o);
+      });
+      qs.addEventListener("change",function(){ex.qid=qs.value;});
+      lq.appendChild(qs); l2.appendChild(lq);
+      var keep=el("button","go","報告として残す"); keep.type="button";
+      keep.style.alignSelf="end";
+      keep.addEventListener("click",function(){attachExec(scope,tid,k,qs.value);});
+      l2.appendChild(keep);
+      box.appendChild(l2);
+    }
+    return box;
+  }
+
+  function runExec(scope,tid,k){
+    var st=aiState(k), ex=execState(k);
+    if(ex.busy) return;
+    var g=generalById(ex.gid); if(!g) return;
+    var instr=(ex.text===null?st.out:ex.text).trim();
+    if(!instr){ ex.note="＊ 渡す指示が空です。"; render(); return; }
+    var ctx = scope==="realm"
+      ? realmContext(state.realms.filter(function(x){return x.id===tid;})[0]||{name:"",role:"",type:""})
+      : routeContext(state.funnels.filter(function(x){return x.id===tid;})[0]||{name:""});
+
+    var body="あなたは「"+g.name+"」という配下の武将です。"
+      +(g.skill?("得手は「"+g.skill+"」。"):"")
+      +"軍師の進言を指示として受け取り、成果物そのものを作ります。\n\n"
+      +(g.prompt?("【命の受け方】\n"+g.prompt+"\n\n"):"")
+      +"【作法】\n- 日本語。前置き・復唱・おだてはしない\n"
+      +"- 進言の内容を評したり言い換えたりせず、指示として実行する\n"
+      +"- 助言ではなく、そのまま使える成果物を出す\n"
+      +"- 事実が確かめられない箇所は［要確認］と印を付け、勝手に埋めない\n\n"
+      +"【軍師の進言（これがあなたへの指示です）】\n"+instr+"\n\n"
+      +"【今の状況】\n"+ctx;
+    var sc=shelfContext(scope,tid);
+    if(sc) body+="\n\n"+sc;
+
+    ex.busy=true; ex.out=""; ex.note="執行中…"; ex.ctl=new AbortController();
+    render();
+    sampler(body,{cache:false,signal:ex.ctl.signal,modelTier:"default",
+      onText:function(u){ex.out=u.text;ex.note="";paintExec(k);}})
+      .then(function(res){
+        ex.out=res.text; ex.busy=false; ex.ctl=null;
+        ex.note=res.truncated?"＊ 途中で切れました。指示を小さく分けてください。":"";
+        render();
+      }).catch(function(e){
+        ex.busy=false; ex.ctl=null;
+        if(e&&e.text) ex.out=e.text;
+        var c=e&&e.code;
+        ex.note=c==="cancelled"?"＊ 止めました。"
+          :c==="not_granted"?"＊ この画面からClaudeに命じる許可がありません。"
+          :c==="rate_limited"?"＊ 立て込んでいます。少し置いてから。"
+          :c==="prompt_too_large"?"＊ 指示が長すぎます。削ってください。"
+          :"＊ 成果を得られませんでした（"+(c||"unknown")+"）。";
+        render();
+      });
+  }
+
+  function attachExec(scope,tid,k,qid){
+    var ex=execState(k);
+    var g=generalById(ex.gid);
+    if(!ex.out||!g) return;
+    var q;
+    if(qid==="__new__"){
+      var src=(ex.text===null?aiState(k).out:ex.text)||ex.out;
+      var line=(src.split("\n").filter(function(x){return x.trim();})[0]||"軍師の進言の実行").trim();
+      if(line.length>40) line=line.slice(0,40)+"…";
+      q={id:uid(),realmId:tid,title:line,kind:"sub",status:"doing",due:null,difficulty:2,
+        parentId:null,assignee:g.name,createdAt:new Date().toISOString(),completedAt:null};
+      state.quests.push(q);
+      if(db) db.doc("quests/"+q.id).set(q).catch(warn);
+    }else{
+      q=state.quests.filter(function(x){return x.id===qid;})[0];
+      if(!q) return;
+    }
+    var r={id:uid(),questId:q.id,realmId:tid,generalName:g.name,
+      text:ex.out.slice(0,60000),at:new Date().toISOString()};
+    state.reports.push(r);
+    ex.note="＊ 「"+q.title+"」に報告として残しました。";
+    render();
+    if(db) db.doc("reports/"+r.id).set(r).catch(warn);
+  }
+
+  /* ---------- 書庫（ファイルを領地に置く） ---------- */
+  var TEXTY=/\.(txt|md|markdown|csv|tsv|json|ya?ml|html?|xml|log|srt|vtt)$/i;
+  var DOC_MAX=20000, PROMPT_BUDGET=24000;
+
+  function docsFor(scope,tid){
+    return state.docs.filter(function(d){return d.scope===scope&&d.targetId===tid;})
+      .sort(function(a,b){return (a.addedAt||"").localeCompare(b.addedAt||"");});
+  }
+  function saveDoc(d){
+    var i=state.docs.findIndex(function(x){return x.id===d.id;});
+    if(i>=0)state.docs[i]=d; else state.docs.push(d);
+    render();
+    if(db) db.doc("docs/"+d.id).set(d).catch(warn);
+  }
+  function removeDoc(d){
+    state.docs=state.docs.filter(function(x){return x.id!==d.id;});
+    render();
+    if(db) db.doc("docs/"+d.id).delete().catch(warn);
+  }
+
+  var BINARY={pdf:pdfToText,docx:docxToText,pptx:pptxToText};
+  var OLD={doc:"Word（旧形式 .doc）",xls:"Excel（旧形式 .xls）",xlsx:"Excel（.xlsx）",
+    pages:"Pages",numbers:"Numbers",key:"Keynote"};
+
+  function shelveText(scope,tid,name,t){
+    var cut=t.length>DOC_MAX;
+    saveDoc({id:uid(),scope:scope,targetId:tid,kind:"text",name:name,
+      text:cut?t.slice(0,DOC_MAX):t,chars:t.length,truncated:cut,on:true,
+      addedAt:new Date().toISOString()});
+  }
+
+  function intakeFiles(scope,tid,files){
+    var k=scope+":"+tid, st=aiState(k);
+    var list=Array.prototype.slice.call(files||[]);
+    if(!list.length) return;
+    var skipped=[];
+    list.forEach(function(file){
+      if(/^image\//.test(file.type)){ st.images.push(file); return; }
+      var ext=extFor(file.name);
+
+      if(BINARY[ext]){
+        st.note="＊ "+file.name+" を読み取り中…";
+        paintOut(k);
+        BINARY[ext](file).then(function(t){
+          t=(t||"").replace(/[\u0000-\u0008\u000b\u000c\u000e-\u001f]/g,"").trim();
+          if(t.length<20){
+            st.note="＊ "+file.name+" から文字を取り出せませんでした（画像だけのPDFの可能性）。";
+            render(); return;
+          }
+          shelveText(scope,tid,file.name,t);
+          st.note="＊ "+file.name+" を書庫に納めました（"+t.length.toLocaleString("ja-JP")+"字）。";
+          render();
+        }).catch(function(e){
+          st.note="＊ "+file.name+" を読み取れませんでした（"+((e&&e.message)||"不明")+"）。";
+          render();
+        });
+        return;
+      }
+
+      if(OLD[ext]){ skipped.push(file.name+"＝"+OLD[ext]); return; }
+      if(!TEXTY.test(file.name)&&!/^text\//.test(file.type)){ skipped.push(file.name); return; }
+
+      var fr=new FileReader();
+      fr.onload=function(){ shelveText(scope,tid,file.name,String(fr.result||"")); };
+      fr.onerror=function(){ st.note="＊ "+file.name+" を読み込めませんでした。"; paintOut(k); };
+      fr.readAsText(file);
+    });
+    if(skipped.length){
+      st.note="＊ 未対応 ― "+skipped.join("、")
+        +"。.doc は .docx に、表計算は CSV に保存し直すと読めます。";
+    }
+    render();
+  }
+
+  function shelf(scope,tid){
+    var k=scope+":"+tid, st=aiState(k);
+    var box=el("div","shelf");
+    var hd=el("div","shead");
+    hd.appendChild(el("span","slabel","書 庫"));
+    var ds=docsFor(scope,tid);
+    var onCount=ds.filter(function(d){return d.on;}).length;
+    hd.appendChild(el("span","scount",ds.length?(onCount+" / "+ds.length+" を渡す"):"空"));
+    box.appendChild(hd);
+
+    if(ds.length){
+      var ul=el("ul","dlist");
+      ds.forEach(function(d){
+        var li=el("li","drow");
+        var lab=document.createElement("label"); lab.className="dcheck";
+        var cb=document.createElement("input"); cb.type="checkbox"; cb.id="doc-"+d.id; cb.checked=!!d.on;
+        cb.addEventListener("change",function(){saveDoc(Object.assign({},d,{on:cb.checked}));});
+        lab.appendChild(cb);
+        lab.appendChild(document.createTextNode(d.name));
+        li.appendChild(lab);
+        if(d.kind==="path") li.appendChild(el("span","dpath",d.path||""));
+        else li.appendChild(el("span","dsize",(d.chars||0).toLocaleString("ja-JP")+"字"+(d.truncated?"（先頭のみ）":"")));
+        var del=actBtn("破棄",function(){removeDoc(d);}); del.classList.add("del");
+        li.appendChild(del);
+        ul.appendChild(li);
+      });
+      box.appendChild(ul);
+    }
+
+    if(st.images.length){
+      var im=el("div","imgs");
+      im.appendChild(el("span","slabel","画 像"));
+      st.images.forEach(function(f,i){
+        var chip=el("span","chip",f.name);
+        var x=actBtn("×",function(){st.images.splice(i,1);render();});
+        chip.appendChild(x); im.appendChild(chip);
+      });
+      im.appendChild(el("span","dsize","※ この一度だけ渡す"));
+      box.appendChild(im);
+    }
+
+    var drop=el("label","drop");
+    drop.appendChild(el("span",null,"＋ 文書をここに落とす／選ぶ"));
+    drop.appendChild(el("span","dhint","PDF・Word（.docx）・PowerPoint（.pptx）・テキスト（txt・md・csv・json・html）は書庫に残る。画像はその一度だけ"));
+    var fi=document.createElement("input"); fi.type="file"; fi.multiple=true; fi.id="files-"+k;
+    fi.accept=".txt,.md,.markdown,.csv,.tsv,.json,.yml,.yaml,.html,.htm,.xml,.log,.pdf,.docx,.pptx,text/*,image/*";
+    fi.addEventListener("change",function(){intakeFiles(scope,tid,fi.files);fi.value="";});
+    drop.appendChild(fi);
+    ["dragenter","dragover"].forEach(function(ev){
+      drop.addEventListener(ev,function(e){e.preventDefault();drop.classList.add("over");});
+    });
+    ["dragleave","drop"].forEach(function(ev){
+      drop.addEventListener(ev,function(e){e.preventDefault();drop.classList.remove("over");});
+    });
+    drop.addEventListener("drop",function(e){
+      if(e.dataTransfer&&e.dataTransfer.files) intakeFiles(scope,tid,e.dataTransfer.files);
+    });
+    box.appendChild(drop);
+
+    var pf=el("form","pathform");
+    var lp=el("label",null,null); lp.appendChild(document.createTextNode("場所の控え（Macのパスを手で書く）"));
+    var pi=document.createElement("input"); pi.type="text"; pi.id="path-"+k;
+    pi.placeholder="~/Documents/HAL/年間営業計画.md";
+    lp.appendChild(pi); pf.appendChild(lp);
+    var pg=el("button","go","控える"); pg.type="submit"; pf.appendChild(pg);
+    pf.addEventListener("submit",function(e){
+      e.preventDefault();
+      var v=pi.value.trim(); if(!v) return;
+      var nm=v.split("/").pop()||v;
+      saveDoc({id:uid(),scope:scope,targetId:tid,kind:"path",name:nm,path:v,
+        text:"",chars:0,on:true,addedAt:new Date().toISOString()});
+      pi.value="";
+    });
+    box.appendChild(pf);
+    box.appendChild(el("div","dhint","※ 場所は控えるだけで、中身は読めません。Claude Codeへ渡す指示を作るための覚書です。"));
+    return box;
+  }
+
+  function shelfContext(scope,tid){
+    var all=docsFor(scope,tid).filter(function(d){return d.on;});
+    var paths=all.filter(function(d){return d.kind==="path"&&d.path;});
+    var ds=all.filter(function(d){return d.kind!=="path"&&d.text;});
+    var pathBlock=paths.length?("# 参照すべきファイルの場所（中身は未読）\n"
+      +"この画面からは中身を読めません。内容が必要な指示を出すときは、このパスを明示して「Claude Codeでこのファイルを読んで」と書ける形にしてください。\n"
+      +paths.map(function(d){return "- "+d.path;}).join("\n")):"";
+    if(!ds.length) return pathBlock;
+    var out=[], used=0;
+    ds.forEach(function(d){
+      if(used>=PROMPT_BUDGET) return;
+      var room=PROMPT_BUDGET-used;
+      var t=d.text.length>room?d.text.slice(0,room):d.text;
+      used+=t.length;
+      out.push("## "+d.name+(t.length<d.text.length||d.truncated?"（一部）":"")+"\n"+t);
+    });
+    return "# 渡した資料\n"+out.join("\n\n");
+  }
+
+  /* ---------- 軍師（担当AIマネージャー） ---------- */
+  var sampler=null, ai={};
+  function aiState(k){return ai[k]||(ai[k]={draft:"",out:"",busy:false,turns:[],note:"",ctl:null,images:[]});}
+  function managerFor(scope,tid){
+    return state.managers.filter(function(m){return m.scope===scope&&m.targetId===tid;})[0]||null;
+  }
+  function paintOut(k){
+    var st=aiState(k), e=document.getElementById("aiout-"+k);
+    if(e) e.textContent=st.out;
+    var n=document.getElementById("ainote-"+k);
+    if(n) n.textContent=st.note;
+  }
+
+  function realmContext(r){
+    var L=[];
+    L.push("# きょうの日付\n"+TODAY);
+    L.push("# 領地\n名前: "+r.name+"\n役職: "+r.role+"\n種別: "+r.type);
+    var ps=patrolsOf(r.id);
+    if(ps.length) L.push("# 巡回\n"+ps.map(function(p){return "- "+p.date+" "+p.title;}).join("\n"));
+    var qs=questsOf(r.id);
+    var KIND={main:"メイン",sub:"サブ",daily:"デイリー"};
+    var ST={todo:"未着手",doing:"進行中",done:"完了"};
+    L.push("# クエスト（"+qs.length+"件）\n"+(qs.length?qs.map(function(q){
+      return "- ["+ST[q.status]+"]["+(KIND[q.kind]||q.kind)+"][★"+(q.difficulty||1)+"]"
+        +(q.due?"[期日 "+q.due+"]":"[期日なし]")+" "+q.title;
+    }).join("\n"):"（なし）"));
+    return L.join("\n\n");
+  }
+  function routeContext(f){
+    var L=[];
+    L.push("# きょうの日付\n"+TODAY);
+    L.push("# ファネル\n"+f.name+"\n構造: 共通の集客導線 → 複数のフロントセミナー（入口） → 合流 → 1本の本線（教育・販売・継続）");
+    var ES={todo:"未着手",wip:"制作中",live:"稼働中"};
+    var es=entriesOf(f.id);
+    L.push("# 入口（フロントセミナー）\n"+(es.length?es.map(function(e){
+      var ms=entryModules(e.id).map(function(m){return m.title+"("+ES[m.status]+")";}).join("、");
+      return "- "+e.name+" ["+ES[e.status]+"]"+(e.heldOn?" 開催 "+e.heldOn:"")
+        +(typeof e.apply==="number"?" 申込"+e.apply:"")+(typeof e.attend==="number"?" 参加"+e.attend:"")
+        +"\n  モジュール: "+(ms||"なし");
+    }).join("\n"):"（なし）"));
+    var tot=totalAttend(f.id);
+    L.push("# 合流\n参加合計: "+(tot===null?"未入力":tot));
+    var main=mainModules(f.id);
+    L.push("# 本線\n"+main.map(function(m){
+      return "- ["+m.stage+"]["+ES[m.status]+"] "+m.title
+        +(typeof m.metricValue==="number"?" / "+(m.metricLabel||"数値")+" "+m.metricValue:"");
+    }).join("\n"));
+    var g=routeGap(f.id);
+    L.push("# いま画面が指している欠け\n"+(g?(g.label+" ： "+g.where):"なし"));
+    return L.join("\n\n");
+  }
+
+  function advisorWindow(scope,tid){
+    var k=scope+":"+tid;
+    var st=aiState(k);
+    var m=managerFor(scope,tid);
+    var w=el("div","win advisor"); w.style.marginTop="16px";
+
+    var hd=el("div","adhead");
+    var adt=el("div","adtitle");
+    adt.appendChild(el("h3",null,"軍師に相談する"));
+    adt.appendChild(el("div","adwho",m?("― "+m.name):"― 未任命"));
+    hd.appendChild(adt);
+    var tools=el("div","adtools");
+    tools.appendChild(actBtn(view.editManager===k?"閉じる":"軍師を改める",function(){
+      view.editManager=view.editManager===k?null:k; render();
+    }));
+    if(st.out) tools.appendChild(copyAct(function(){return aiState(k).out;}));
+    if(st.turns.length) tools.appendChild(actBtn("初めから",function(){
+      st.turns=[];st.out="";st.note="";render();
+    }));
+    hd.appendChild(tools);
+    w.appendChild(hd);
+
+    if(!sampler){
+      w.appendChild(el("div","adnote","この画面からClaudeに相談できません。"));
+      return w;
+    }
+    if(view.editManager===k){ w.appendChild(managerEditor(scope,tid,m)); return w; }
+    if(!m){
+      w.appendChild(el("div","adnote","「軍師を改める」から名と役割を定めてください。"));
+      return w;
+    }
+
+    w.appendChild(shelf(scope,tid));
+
+    var out=el("pre","aiout"); out.id="aiout-"+k; out.textContent=st.out;
+    w.appendChild(out);
+    var note=el("div","adnote"); note.id="ainote-"+k; note.textContent=st.note;
+    w.appendChild(note);
+
+    var f=el("form","adform");
+    var ta=document.createElement("textarea");
+    ta.id="aiin-"+k; ta.rows=3; ta.value=st.draft;
+    ta.placeholder=(scope==="realm"?"この領地について訊くこと":"このファネルについて訊くこと");
+    ta.addEventListener("input",function(){st.draft=ta.value;});
+    f.appendChild(ta);
+    var row=el("div","adrow");
+    var go=el("button","go",st.busy?"思案中…":"進言を請う"); go.type="submit"; go.disabled=st.busy;
+    row.appendChild(go);
+    if(st.busy) row.appendChild(actBtn("止める",function(){ if(st.ctl)st.ctl.abort(); }));
+    f.appendChild(row);
+    f.addEventListener("submit",function(e){e.preventDefault();ask(scope,tid,m);});
+    w.appendChild(f);
+    if(st.out&&!st.busy) w.appendChild(execPanel(scope,tid,k));
+    return w;
+  }
+
+  function managerEditor(scope,tid,m){
+    var f=el("form","medit");
+    var l1=el("div","line");
+    var ln=el("label",null,null); ln.className="tline"; ln.appendChild(document.createTextNode("軍師の名"));
+    var ni=document.createElement("input"); ni.type="text"; ni.id="g-nm-"+scope+tid;
+    ni.value=m?m.name:""; ni.placeholder="○○の軍師"; ni.required=true;
+    ln.appendChild(ni); l1.appendChild(ln);
+    f.appendChild(l1);
+    var lp=el("label",null,null); lp.appendChild(document.createTextNode("役割（Claudeへの指示）"));
+    var pa=document.createElement("textarea"); pa.id="g-ps-"+scope+tid; pa.rows=5;
+    pa.value=m?m.persona:"";
+    pa.placeholder="なにを重視して助言するか。例：受注につながる順に並べ替える。法令の期限を最優先する。";
+    lp.appendChild(pa); f.appendChild(lp);
+    var go=el("button","go","記す"); go.type="submit"; f.appendChild(go);
+    f.addEventListener("submit",function(e){
+      e.preventDefault();
+      var id=m?m.id:uid();
+      var n={id:id,scope:scope,targetId:tid,name:ni.value.trim()||"ぐんし",persona:pa.value.trim()};
+      var i=state.managers.findIndex(function(x){return x.id===id;});
+      if(i>=0)state.managers[i]=n; else state.managers.push(n);
+      view.editManager=null; render();
+      if(db) db.doc("managers/"+id).set(n).catch(warn);
+    });
+    return f;
+  }
+
+  function ask(scope,tid,m){
+    var k=scope+":"+tid, st=aiState(k);
+    var q=st.draft.trim(); if(!q||st.busy) return;
+    var ctx, tools=null;
+    if(scope==="realm"){
+      var r=state.realms.filter(function(x){return x.id===tid;})[0];
+      if(!r) return;
+      ctx=realmContext(r);
+      tools=[{
+        name:"add_quest",
+        description:"この領地にクエスト（タスク）を1件追加する。追加したクエストのIDを返す。分解や段取りを提案したあと、実際に登録するときだけ使う。",
+        inputSchema:{type:"object",properties:{
+          title:{type:"string",description:"クエスト名。何をするかが分かる短い日本語"},
+          kind:{type:"string",enum:["main","sub","daily"],description:"main=期日があり外せないもの sub=進めたい施策 daily=ルーチン"},
+          due:{type:"string",description:"期日 YYYY-MM-DD。分からなければ省略する"},
+          difficulty:{type:"number",description:"難易度 1〜5"}
+        },required:["title","kind"]},
+        execute:function(input){
+          var t=String(input.title||"").trim();
+          if(!t) throw new Error("titleが空です");
+          var kind=["main","sub","daily"].indexOf(String(input.kind))>=0?String(input.kind):"sub";
+          var due=/^\d{4}-\d{2}-\d{2}$/.test(String(input.due||""))?String(input.due):null;
+          var d=Math.min(5,Math.max(1,Math.round(Number(input.difficulty)||2)));
+          create({realmId:tid,title:t,kind:kind,due:due,difficulty:d});
+          st.note="＊ 任務を加えました ― "+t;
+          paintOut(k);
+          return "追加しました: "+t;
+        }
+      }];
+    }else{
+      var f0=state.funnels.filter(function(x){return x.id===tid;})[0];
+      if(!f0) return;
+      ctx=routeContext(f0);
+    }
+
+    var rules="あなたは「"+m.name+"」という名前の軍師です。芳川恒徳（よしかわつねのり）さんが兼務する役職ごとの担当として、実務の判断を助けます。\n\n"
+      +(m.persona?("【あなたの役割】\n"+m.persona+"\n\n"):"")
+      +"【答え方】\n"
+      +"- 日本語。結論から書く。前置き・復唱・おだてはしない\n"
+      +"- 一般論ではなく、下の状況に即して答える\n"
+      +"- 判断の根拠が足りないときは、推測で埋めずに確認すべき点を挙げる\n"
+      +"- 同意できない前提があれば、そう言う\n"
+      +(tools?"- 段取りを分解して実際に登録すべきときは add_quest を使う。使ったら何を追加したか一行で述べる\n":"")
+      +"\n【いまの状況】\n"+ctx
+      +(shelfContext(scope,tid)?("\n\n"+shelfContext(scope,tid)):"")
+      +(st.images.length?"\n\n【画像】\nこの質問には画像が添付されています。見て答えてください。":"");
+
+    st.turns.push({role:"user",content:q});
+    st.draft=""; st.busy=true; st.out=""; st.note="かんがえちゅう…";
+    st.ctl=new AbortController();
+    render();
+
+    var input=[{role:"user",content:rules}].concat(st.turns.slice(-8));
+    var opts={cache:false,signal:st.ctl.signal,modelTier:"default",
+      onText:function(u){st.out=u.text;st.note="";paintOut(k);}};
+    if(tools) opts.tools=tools;
+    if(st.images.length){ opts.images=st.images.slice(); st.images=[]; }
+
+    sampler(input,opts).then(function(res){
+      st.turns.push({role:"assistant",content:res.text});
+      st.out=res.text; st.busy=false; st.ctl=null;
+      if(res.truncated) st.note="＊ 途中で切れました。小さく分けて訊いてください。";
+      render();
+    }).catch(function(e){
+      st.busy=false; st.ctl=null;
+      if(e&&e.text) st.out=e.text;
+      var c=e&&e.code;
+      st.note=c==="cancelled"?"＊ 止めました。"
+        :c==="not_granted"?"＊ この画面からClaudeに相談する許可がありません。"
+        :c==="rate_limited"?"＊ 立て込んでいます。少し置いてから。"
+        :c==="prompt_too_large"?"＊ 問いが長すぎます。"
+        :"＊ 答えを得られませんでした（"+(c||"unknown")+"）。";
+      st.turns.pop();
+      render();
+    });
+  }
+
+  /* ---------- 起動 ---------- */
+  render();
+
+  if(window.claude&&typeof window.claude.use==="function"){
+    window.claude.use("db").then(function(d){
+      if(!d){ $("dbNotice").classList.remove("hidden"); return; }
+      db=d; ready=true;
+      function sync(col,key){
+        db.collection(col).onSnapshot(function(snap){
+          state[key]=snap.docs.map(function(s){var o=Object.assign({},s.data());o.id=s.id;return o;});
+          render();
+        },function(e){warn(e);});
+      }
+      sync("realms","realms"); sync("quests","quests"); sync("patrols","patrols");
+      sync("funnels","funnels"); sync("entries","entries"); sync("modules","modules");
+      sync("managers","managers"); sync("docs","docs");
+      sync("generals","generals"); sync("reports","reports");
+      db.doc("hero/status").onSnapshot(function(s){
+        if(s.exists){var d2=s.data();state.hero={gold:d2.gold||0};render();}
+      },function(e){warn(e);});
+    }).catch(function(){ $("dbNotice").classList.remove("hidden"); });
+  }else{
+    $("dbNotice").classList.remove("hidden");
+  }
+
+  if(window.claude&&typeof window.claude.use==="function"){
+    window.claude.use("sample").then(function(s2){ if(s2){sampler=s2;render();} }).catch(function(){});
+  }
+})();
+</script>
