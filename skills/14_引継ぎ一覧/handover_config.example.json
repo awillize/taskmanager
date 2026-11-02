@@ -1,0 +1,45 @@
+{
+  "_説明": "このファイルを handover_config.json という名前で写して、fields の値を実際のフィールドコードに書き換える。フィールドコードは `node handover_kintone.js fields` で確認する。使わない項目は null にする。",
+  "domain": "（assistant_kintone_digest.js と同じドメイン）.cybozu.com",
+  "tokenEnv": "KINTONE_HANDOVER_TOKEN",
+  "apps": { "progress": 33, "orders": 30 },
+  "people": {
+    "栗林": "mayu.k@hal-ulala.jp",
+    "井上": "gaikoku-support@hal-ulala.jp",
+    "金": "kin@hal-ulala.jp",
+    "芳川": "yoshikawa@hal-ulala.jp"
+  },
+  "fields": {
+    "assignee": "HAL担当者",
+    "company": "所属機関",
+    "title": "案件名",
+    "applicant": "申請人",
+    "applicationType": "申請種類",
+    "visa": "在留資格",
+    "field": "分野",
+    "status": ["ステイタス_入管", "ステイタス_国交省"],
+    "ball": "ボール",
+    "expiry": "在留期限",
+    "completedDate": "案件完了日",
+    "applyDates": ["申請日1", "申請日2", "申請日3", "申請日4"],
+    "receiptNos": ["受付番号1", "受付番号2", "受付番号3", "受付番号4"],
+    "nextContact": "連絡予定日",
+    "supporter": "支援機関",
+    "memo": "進捗メモ",
+    "progressTable": "進捗の記録",
+    "progressDate": "日付",
+    "progressStaff": "担当",
+    "progressText": "内容"
+  },
+  "orderFields": {
+    "assignee": "HAL担当者",
+    "title": "案件名",
+    "customer": "顧客名",
+    "status": "進捗状況",
+    "amount": "受注額合計",
+    "invoice": "請求日",
+    "payment": "入金日",
+    "orderDate": "受注確認日",
+    "openQuery": "進捗状況 not in (\"完了\", \"失注\")"
+  }
+}
